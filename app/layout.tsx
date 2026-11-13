@@ -38,27 +38,18 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
-          fontJapan.variable, fontFredoka.variable,
+          fontJapan.variable,
+          fontFredoka.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
-            <Navbar />
+          <div className="relative flex min-h-screen flex-col">
             <LenisSmoothScroll>
-              <main className="container mx-auto max-w-7xl pt-16 px-6 grow">
-              {children}
-            </main>
+              <main className="w-full grow">{children}</main>
             </LenisSmoothScroll>
-            <footer className="w-full flex items-center justify-center py-3">
-              <a
-                className="flex items-center gap-1 text-current no-underline"
-                href="https://heroui.com?utm_source=next-app-template"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <span className="text-muted">Powered by</span>
-                <p className="text-accent">HeroUI</p>
-              </a>
+
+            <footer className="flex w-full items-center justify-center py-3">
+              {/* Your footer */}
             </footer>
           </div>
         </Providers>

@@ -1,11 +1,21 @@
-import ParallaxGallery from "@/components/ParalaxWrapper";
+import ParallaxGallery from "@/components/photocard/ParalaxWrapper";
+import LandingScene from "@/components/section-1/BackgroundWood";
+import MattingPad from "@/components/section-1/Mattingpad";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <section className="flex w-full flex-col items-center justify-center gap-4 overflow-x-clip py-8">
-<div className="mx-auto w-full max-w-6xl px-4">
-  <ParallaxGallery />
-</div>
-    </section>
+    <LandingScene>
+      <MattingPad className="max-w-5xl">
+        <Image
+          src="/background/8.png"
+          alt="Matting pad"
+          width={1200}
+          height={800}
+          priority
+          className="h-auto w-full"
+        />
+      </MattingPad>
+    </LandingScene>
   );
 }
