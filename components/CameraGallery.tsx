@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { animate, createDraggable, stagger } from "animejs";
 
-import PhotoCard from "@/components/PhotoCard";
+import PhotoCard from "./PhotoCard";
 
 export const GalleryUrl = [
   "/cosplay/4.png",
@@ -15,12 +15,12 @@ export const GalleryUrl = [
 ];
 
 const positions = [
-  { left: "2%", top: "70px", rotate: -12 },
-  { left: "18%", top: "20px", rotate: 8 },
-  { left: "35%", top: "85px", rotate: -5 },
-  { left: "52%", top: "25px", rotate: 10 },
-  { left: "69%", top: "75px", rotate: -8 },
-  { left: "85%", top: "15px", rotate: 6 },
+  { left: "2%", top: "65px", rotate: -13 },
+  { left: "18%", top: "20px", rotate: -9 },
+  { left: "35%", top: "75px", rotate: -4 },
+  { left: "52%", top: "30px", rotate: 2 },
+  { left: "69%", top: "80px", rotate: 8 },
+  { left: "85%", top: "35px", rotate: 12 },
 ];
 
 const descriptions = [
@@ -39,8 +39,17 @@ export default function CameraGallery() {
     const gallery = galleryRef.current;
     if (!gallery) return;
 
-    const shells = gallery.querySelectorAll<HTMLElement>("[data-card-shell]");
-    const handles = gallery.querySelectorAll<HTMLElement>("[data-drag-handle]");
+    const shells = gallery.querySelectorAll<HTMLElement>(
+      "[data-card-shell]",
+    );
+
+    const cards = gallery.querySelectorAll<HTMLElement>(
+      "[data-draggable-card]",
+    );
+
+    const handles = gallery.querySelectorAll<HTMLElement>(
+      "[data-drag-handle]",
+    );
 
     const entrance = animate(shells, {
       opacity: [0, 1],
@@ -50,13 +59,13 @@ export default function CameraGallery() {
       ease: "out(2)",
     });
 
-    const draggables = Array.from(handles).map((handle) =>
-      createDraggable(handle.parentElement!, {
+    const draggables = Array.from(cards).map((card, index) =>
+      createDraggable(card, {
         container: gallery,
+        trigger: handles[index],
         releaseStiffness: 180,
         releaseDamping: 24,
         cursor: true,
-        trigger: handle,
       }),
     );
 
@@ -71,7 +80,6 @@ export default function CameraGallery() {
       ref={galleryRef}
       className="relative h-[380px] w-full overflow-hidden"
       style={{
-        perspective: "1000px",
         touchAction: "pan-y",
       }}
     >
@@ -82,7 +90,7 @@ export default function CameraGallery() {
           <div
             key={image}
             data-card-shell
-className="absolute w-[22%] min-w-40 max-w-64"
+            className="absolute w-[22%] min-w-40 max-w-64"
             style={{
               left: position.left,
               top: position.top,
@@ -91,13 +99,7 @@ className="absolute w-[22%] min-w-40 max-w-64"
               transform: `rotate(${position.rotate}deg)`,
             }}
           >
-            <div className="relative">
-              <div
-                data-drag-handle
-                className="absolute inset-x-0 top-0 z-20 h-[75%] cursor-grab active:cursor-grabbing"
-                aria-label={`Drag photo ${index + 1}`}
-              />
-
+            <div data-draggable-card className="w-full">
               <PhotoCard
                 image={image}
                 alt={`Wedding moment ${index + 1}`}
@@ -109,7 +111,7 @@ className="absolute w-[22%] min-w-40 max-w-64"
         );
       })}
 
-      <div className="pointer-events-none absolute bottom-2 right-2 z-50 rounded-full bg-background/80 px-3 py-2 text-xs text-default-500 backdrop-blur">
+      <div className="pointer-events-none absolute bottom-2 right-2 z-50 rounded-full border border-default-200 bg-background/80 px-3 py-2 text-xs text-default-500 backdrop-blur">
         ↔ Drag photos to explore
       </div>
     </div>
