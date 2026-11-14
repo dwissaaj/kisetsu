@@ -7,7 +7,19 @@
   --font-japan: var(--font-japan);
   --font-fredoka: var(--font-fredoka);
 }
+@theme {
+  /* Kisetsu - Base palette */
+  --color-kisetsu: #FFE8C4;
+  --color-kisetsu-dark: #594936;
+  --color-kisetsu-muted: #9B8465;
+  --color-kisetsu-border: #D9C49F;
 
+  /* Seasonal palette */
+  --color-haru: #F5C6D0;
+  --color-natsu: #B8CDA3;
+  --color-aki: #D99559;
+  --color-fuyu: #C5D9E8;
+}
 :root,
 .light,
 .default,

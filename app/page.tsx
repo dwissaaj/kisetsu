@@ -1,13 +1,16 @@
 import ParallaxGallery from "@/components/photocard/ParalaxWrapper";
-import LandingScene from "@/components/section-1/BackgroundWood";
+import IntroSequence from "@/components/section-1/IntroSequence";
+import LandingScene from "@/components/section-1/LandingScene";
 import MattingPad from "@/components/section-1/Mattingpad";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <LandingScene>
-      <MattingPad className="max-w-5xl">
-        <Image
+    <IntroSequence>
+      <LandingScene>
+        <MattingPad>
+         
+<Image
           src="/background/8.png"
           alt="Matting pad"
           width={1200}
@@ -15,7 +18,10 @@ export default function Home() {
           priority
           className="h-auto w-full"
         />
-      </MattingPad>
-    </LandingScene>
+        </MattingPad>
+
+        {/* Your existing landing page content */}
+      </LandingScene>
+    </IntroSequence>
   );
 }

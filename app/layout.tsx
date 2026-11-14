@@ -34,7 +34,14 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      <head >
+        <link
+  rel="preload"
+  href="/loader/wave.svg"
+  as="image"
+  type="image/svg+xml"
+/>
+      </head>
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
