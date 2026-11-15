@@ -8,6 +8,7 @@ import LandingScene from "@/components/section-1/loader/LandingScene";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {
+
   return (
     <IntroSequence>
         <ScrollIndicator />
