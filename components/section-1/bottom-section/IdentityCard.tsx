@@ -5,8 +5,8 @@ export default function IdentityCard() {
     <div className="relative z-30 w-full max-w-[420px] overflow-hidden border border-white/50 shadow-sm">
       <video
         autoPlay
-        muted
         loop
+        muted
         playsInline
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover"

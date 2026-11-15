@@ -9,6 +9,7 @@ export default function WaveLoading() {
 
   useEffect(() => {
     const wave = waveRef.current;
+
     if (!wave) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -28,18 +29,18 @@ export default function WaveLoading() {
     };
   }, []);
 
-return (
-  <div className="relative mx-auto h-10 w-[100px] overflow-hidden">
-    <div ref={waveRef} className="relative h-full w-full">
-      <Image
-        src="/loader/wave.png"
-        alt=""
-        fill
-        priority
-        sizes="100px"
-        className="object-contain"
-      />
+  return (
+    <div className="relative mx-auto h-10 w-[100px] overflow-hidden">
+      <div ref={waveRef} className="relative h-full w-full">
+        <Image
+          fill
+          priority
+          alt=""
+          className="object-contain"
+          sizes="100px"
+          src="/loader/wave.png"
+        />
+      </div>
     </div>
-  </div>
-);
+  );
 }

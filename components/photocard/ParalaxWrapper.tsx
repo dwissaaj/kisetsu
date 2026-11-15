@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+
 import CameraGallery from "./CameraGallery";
 
 export default function ParallaxGallery() {

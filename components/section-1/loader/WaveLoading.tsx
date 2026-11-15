@@ -12,6 +12,7 @@ export default function AnimatedWave() {
     fetch("/loader/wave.svg")
       .then((response) => {
         if (!response.ok) throw new Error("Could not load wave.svg");
+
         return response.text();
       })
       .then((markup) => {
@@ -26,9 +27,11 @@ export default function AnimatedWave() {
 
   useEffect(() => {
     const container = containerRef.current;
+
     if (!container || !svgMarkup) return;
 
     const svg = container.querySelector("svg");
+
     if (!svg) return;
 
     // Keep SVG responsive but small
@@ -52,6 +55,7 @@ export default function AnimatedWave() {
     }
 
     const filter = document.createElementNS(namespace, "filter");
+
     filter.setAttribute("id", "wave-flow");
     filter.setAttribute("x", "-15%");
     filter.setAttribute("y", "-15%");
@@ -59,6 +63,7 @@ export default function AnimatedWave() {
     filter.setAttribute("height", "130%");
 
     const turbulence = document.createElementNS(namespace, "feTurbulence");
+
     turbulence.setAttribute("type", "fractalNoise");
     turbulence.setAttribute("baseFrequency", "0.008 0.025");
     turbulence.setAttribute("numOctaves", "2");
@@ -67,17 +72,14 @@ export default function AnimatedWave() {
 
     const displacement = document.createElementNS(
       namespace,
-      "feDisplacementMap"
+      "feDisplacementMap",
     );
 
     displacement.setAttribute("in", "SourceGraphic");
     displacement.setAttribute("in2", "noise");
     displacement.setAttribute("scale", "0");
 
-    const distortionAnimation = document.createElementNS(
-      namespace,
-      "animate"
-    );
+    const distortionAnimation = document.createElementNS(namespace, "animate");
 
     distortionAnimation.setAttribute("attributeName", "scale");
     distortionAnimation.setAttribute("values", "0;5;12;7;0");
@@ -95,17 +97,17 @@ export default function AnimatedWave() {
     };
   }, [svgMarkup]);
 
-return (
-  <div
-    ref={containerRef}
-    className="mx-auto flex h-10 w-36 shrink-0 items-center justify-center"
-    style={{
-      opacity: svgMarkup ? 1 : 0,
-      transition: "opacity 500ms ease-in-out",
-    }}
-    dangerouslySetInnerHTML={{
-      __html: svgMarkup,
-    }}
-  />
-);
+  return (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: svgMarkup,
+      }}
+      ref={containerRef}
+      className="mx-auto flex h-10 w-36 shrink-0 items-center justify-center"
+      style={{
+        opacity: svgMarkup ? 1 : 0,
+        transition: "opacity 500ms ease-in-out",
+      }}
+    />
+  );
 }

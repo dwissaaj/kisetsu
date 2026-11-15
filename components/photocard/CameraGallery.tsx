@@ -37,19 +37,16 @@ export default function CameraGallery() {
 
   useEffect(() => {
     const gallery = galleryRef.current;
+
     if (!gallery) return;
 
-    const shells = gallery.querySelectorAll<HTMLElement>(
-      "[data-card-shell]",
-    );
+    const shells = gallery.querySelectorAll<HTMLElement>("[data-card-shell]");
 
     const cards = gallery.querySelectorAll<HTMLElement>(
       "[data-draggable-card]",
     );
 
-    const handles = gallery.querySelectorAll<HTMLElement>(
-      "[data-drag-handle]",
-    );
+    const handles = gallery.querySelectorAll<HTMLElement>("[data-drag-handle]");
 
     const entrance = animate(shells, {
       opacity: [0, 1],
@@ -101,9 +98,9 @@ export default function CameraGallery() {
           >
             <div data-draggable-card className="w-full">
               <PhotoCard
-                image={image}
                 alt={`Wedding moment ${index + 1}`}
                 description={descriptions[index]}
+                image={image}
                 initialLikes={128 + index * 12}
               />
             </div>

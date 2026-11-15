@@ -44,7 +44,7 @@ export default function PatternDecoration() {
               duration: 6000 + index * 500,
               ease: "inOut(2)",
               loop: true,
-            })
+            }),
           );
         });
 
@@ -85,10 +85,10 @@ export default function PatternDecoration() {
             }}
           >
             <Image
-              src="/layer/pattern.png"
-              alt=""
               fill
+              alt=""
               className="object-contain"
+              src="/layer/pattern.png"
             />
           </div>
         ))}
@@ -96,29 +96,29 @@ export default function PatternDecoration() {
         {/* Left Flower */}
         <div className="flower-item absolute bottom-0 left-0 z-0 h-[400px] w-[400px] opacity-0">
           <Image
-            src="/layer/flower.png"
-            alt=""
             fill
+            alt=""
             className="object-contain object-left-bottom"
+            src="/layer/flower.png"
           />
         </div>
 
         {/* Right Flowers */}
         <div className="flower-item absolute bottom-15 right-0 z-0 h-[200px] w-[200px] opacity-0">
           <Image
-            src="/layer/rflower.png"
-            alt=""
             fill
+            alt=""
             className="object-contain object-right-bottom"
+            src="/layer/rflower.png"
           />
         </div>
 
         <div className="flower-item absolute bottom-15 right-15 z-0 h-[200px] w-[200px] opacity-0">
           <Image
-            src="/layer/rflower.png"
-            alt=""
             fill
+            alt=""
             className="object-contain object-right-bottom"
+            src="/layer/rflower.png"
           />
         </div>
       </div>

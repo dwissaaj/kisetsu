@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { animate } from "animejs";
+import Link from "next/link";
+
 import {
   Carousel,
   CarouselContent,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import { animate } from "animejs";
-import Link from "next/link";
 
 const technologies = [
   {
@@ -107,8 +108,8 @@ export default function TechStatus() {
       {/* Animated video background */}
       <video
         autoPlay
-        muted
         loop
+        muted
         playsInline
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
@@ -118,22 +119,25 @@ export default function TechStatus() {
 
       {/* Technology carousel */}
       <Carousel
-        setApi={setApi}
+        className="w-38"
         opts={{
           loop: true,
           align: "center",
         }}
-        className="w-38"
+        setApi={setApi}
       >
         <CarouselContent className="ml-0">
           {technologies.map((tech) => (
-            <div key={tech.id} ref={tech.name === active.name ? textRef : undefined}>
-              <Link
+            <div
               key={tech.id}
-                href={tech.href}
-                target="_blank"
-                rel="noopener noreferrer"
+              ref={tech.name === active.name ? textRef : undefined}
+            >
+              <Link
+                key={tech.id}
                 className="flex w-full items-center justify-center whitespace-nowrap px-4 text-xs text-white font-semi transition-opacity hover:opacity-70"
+                href={tech.href}
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 {tech.name} ↗
               </Link>

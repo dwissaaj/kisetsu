@@ -29,26 +29,26 @@ export default function PhotoCard({
         className="relative aspect-square w-full cursor-grab overflow-hidden rounded-xl active:cursor-grabbing"
       >
         <Image
-          src={image}
-          alt={alt}
           fill
-          draggable={false}
+          alt={alt}
           className="select-none object-cover transition-transform duration-500 hover:scale-105"
+          draggable={false}
           sizes="(max-width: 768px) 100vw, 320px"
+          src={image}
         />
       </div>
 
       <Card.Content className="flex flex-row items-center justify-between gap-2 font-fredoka">
         <Button
+          aria-label={liked ? "Unlike photo" : "Like photo"}
+          className="shrink-0 px-2 font-bold"
           size="sm"
           variant="ghost"
-          className="shrink-0 px-2 font-bold"
           onPress={() => setLiked((prev) => !prev)}
-          aria-label={liked ? "Unlike photo" : "Like photo"}
         >
           <Heart
-            size={22}
             className={liked ? "fill-rose-500 text-rose-500" : ""}
+            size={22}
           />
           <span>{initialLikes + (liked ? 1 : 0)}</span>
         </Button>

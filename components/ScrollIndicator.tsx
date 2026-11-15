@@ -10,8 +10,7 @@ export default function ScrollIndicator() {
       const scrollable =
         document.documentElement.scrollHeight - window.innerHeight;
 
-      const current =
-        scrollable > 0 ? window.scrollY / scrollable : 0;
+      const current = scrollable > 0 ? window.scrollY / scrollable : 0;
 
       setProgress(Math.min(Math.max(current, 0), 1));
     };

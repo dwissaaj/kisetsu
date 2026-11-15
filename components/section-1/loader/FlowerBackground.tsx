@@ -1,8 +1,8 @@
-
 "use client";
 
 import { useEffect, useRef } from "react";
 import { animate } from "animejs";
+
 import BrushBackground from "./BrushFlower";
 import PetalMove from "./PetalMove";
 
@@ -14,26 +14,20 @@ export default function FlowerBackground() {
     const animations = [
       leftFlowerRef.current &&
         animate(leftFlowerRef.current, {
-          clipPath: [
-            "inset(100% 0 0 0)",
-            "inset(0% 0 0 0)",
-          ],
+          clipPath: ["inset(100% 0 0 0)", "inset(0% 0 0 0)"],
           duration: 2500,
           delay: 200,
           ease: "inOut(2)",
         }),
 
       // 13.png — Center right, reveal from right to left
-rightFlowerRef.current &&
-  animate(rightFlowerRef.current, {
-    clipPath: [
-      "inset(0 0 0 100%)",
-      "inset(0 0 0 0%)",
-    ],
-    duration: 2500,
-    delay: 200,
-    ease: "inOut(2)",
-  }),
+      rightFlowerRef.current &&
+        animate(rightFlowerRef.current, {
+          clipPath: ["inset(0 0 0 100%)", "inset(0 0 0 0%)"],
+          duration: 2500,
+          delay: 200,
+          ease: "inOut(2)",
+        }),
     ];
 
     return () => {

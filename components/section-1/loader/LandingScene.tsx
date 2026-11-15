@@ -26,22 +26,19 @@ export default function LandingScene({
       {/* Moving shadow video */}
       <video
         autoPlay
-        muted
         loop
+        muted
         playsInline
-        preload="auto"
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-10 h-full w-full object-cover"
+        preload="auto"
         style={{
           opacity: 0.4,
           mixBlendMode: "multiply",
           filter: "contrast(1.15) saturate(1.2)",
         }}
       >
-        <source
-          src="/background/bg.mp4"
-          type="video/mp4"
-        />
+        <source src="/background/bg.mp4" type="video/mp4" />
       </video>
 
       {/* Warm lighting layer */}
@@ -54,9 +51,7 @@ export default function LandingScene({
       />
 
       {/* Main content */}
-      <div className="relative z-20 min-h-screen w-full">
-        {children}
-      </div>
+      <div className="relative z-20 min-h-screen w-full">{children}</div>
     </section>
   );
 }

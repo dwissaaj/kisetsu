@@ -14,30 +14,31 @@ export default function Error({
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-  console.error(error);
+    console.error(error);
 
-  const content = contentRef.current;
-  if (!content) return;
+    const content = contentRef.current;
 
-  const animation = animate(content, {
-    translateY: ["-100vh", "0vh"],
-    duration: 2200,
-    ease: "out(3)",
-  });
+    if (!content) return;
 
-  return () => {
-    animation.pause();
-  };
-}, [error]);
+    const animation = animate(content, {
+      translateY: ["-100vh", "0vh"],
+      duration: 2200,
+      ease: "out(3)",
+    });
+
+    return () => {
+      animation.pause();
+    };
+  }, [error]);
 
   return (
     <main className="text-color-old-japan-blue relative flex min-h-screen w-full items-center justify-center overflow-hidden text-color-old-japan-green font-japan">
       <Image
-        src="/error/notFound.png"
-        alt=""
         fill
         priority
+        alt=""
         className="pointer-events-none object-cover"
+        src="/error/notFound.png"
       />
 
       <div
@@ -52,13 +53,11 @@ export default function Error({
           SOMETHING WENT WRONG
         </h2>
 
-        <p className="mt-3 text-2xl font-bold  md:text-3xl">
-          御免なさい
-        </p>
+        <p className="mt-3 text-2xl font-bold  md:text-3xl">御免なさい</p>
 
         <button
-          onClick={() => reset()}
           className="mt-8 rounded-full border-2 border-kisetsu-secondary px-6 py-3 text-sm font-bold tracking-widest text-kisetsu-secondary transition-colors hover:border-[#FA699E] hover:bg-[#FA699E] hover:text-white"
+          onClick={() => reset()}
         >
           TRY AGAIN
         </button>

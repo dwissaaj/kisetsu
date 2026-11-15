@@ -2,8 +2,9 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { NavStackSite } from "@/config/site";
 import { animate, splitText, stagger } from "animejs";
+
+import { NavStackSite } from "@/config/site";
 
 export default function NavStack() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +13,7 @@ export default function NavStack() {
 
   const handleMouseEnter = (element: HTMLAnchorElement, key: string) => {
     const span = element.querySelector(".nav-title") as HTMLSpanElement;
+
     if (!span) return;
 
     animations.current.get(key)?.cancel();
@@ -66,16 +68,16 @@ export default function NavStack() {
         {NavStackSite.map((link, index) => (
           <Link
             key={link.label}
+            className="relative z-10 overflow-hidden rounded-full px-2 py-1 text-xs font-semibold text-white transition-opacity duration-300 hover:opacity-60 md:text-sm"
             href={link.href}
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
             onMouseEnter={(event) =>
               handleMouseEnter(event.currentTarget, String(index))
             }
             onMouseLeave={(event) =>
               handleMouseLeave(event.currentTarget, String(index))
             }
-            className="relative z-10 overflow-hidden rounded-full px-2 py-1 text-xs font-semibold text-white transition-opacity duration-300 hover:opacity-60 md:text-sm"
           >
             <span className="nav-title inline-block" data-label={link.label}>
               {link.label}
@@ -87,10 +89,8 @@ export default function NavStack() {
       {/* MOBILE CONTACT BUTTON */}
       <div className="relative md:hidden">
         <button
-          type="button"
           aria-expanded={isMenuOpen}
           aria-label="Toggle contact menu"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="flex items-center gap-2 rounded-full border border-white/50 px-4 py-2 text-xs font-semibold text-white shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl transition-opacity hover:opacity-70"
           style={{
             backgroundImage: `
@@ -100,6 +100,8 @@ export default function NavStack() {
             backgroundSize: "100% 100%",
             backgroundPosition: "center",
           }}
+          type="button"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           Contact
           <svg
@@ -139,11 +141,11 @@ export default function NavStack() {
             {NavStackSite.map((link) => (
               <Link
                 key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMenuOpen(false)}
                 className="rounded-xl px-4 py-3 text-xs font-semibold text-white transition-colors hover:bg-white/20"
+                href={link.href}
+                rel="noopener noreferrer"
+                target="_blank"
+                onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
                 <span className="ml-2 opacity-60">↗</span>

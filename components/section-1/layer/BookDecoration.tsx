@@ -89,8 +89,6 @@ export default function BookDecoration() {
       <div className="hidden lg:block pointer-events-none fixed left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2">
         <div
           ref={bookHoverRef}
-          onMouseEnter={handleBookEnter}
-          onMouseLeave={handleBookLeave}
           className="pointer-events-auto cursor-pointer"
           style={{
             filter: `
@@ -99,17 +97,19 @@ export default function BookDecoration() {
               drop-shadow(20px 28px 20px rgba(0,0,0,0.12))
             `,
           }}
+          onMouseEnter={handleBookEnter}
+          onMouseLeave={handleBookLeave}
         >
           <div
             ref={bookEntranceRef}
             className="relative h-[320px] w-[250px] opacity-0 sm:h-[430px] sm:w-[340px] lg:h-[520px] lg:w-[410px]"
           >
             <Image
-              src="/layer/book.png"
-              alt=""
               fill
               priority
+              alt=""
               className="object-contain"
+              src="/layer/book.png"
             />
           </div>
         </div>
@@ -119,8 +119,6 @@ export default function BookDecoration() {
       <div className="hidden lg:block pointer-events-none fixed right-[-12%] top-1/2 z-20 -translate-y-1/2">
         <div
           ref={fanHoverRef}
-          onMouseEnter={handleFanEnter}
-          onMouseLeave={handleFanLeave}
           className="pointer-events-auto cursor-pointer"
           style={{
             filter: `
@@ -129,6 +127,8 @@ export default function BookDecoration() {
               drop-shadow(20px 28px 20px rgba(0,0,0,0.12))
             `,
           }}
+          onMouseEnter={handleFanEnter}
+          onMouseLeave={handleFanLeave}
         >
           {/* FAN ENTRANCE - RIGHT TO LEFT */}
           <div
@@ -138,10 +138,10 @@ export default function BookDecoration() {
             {/* FAN ROTATION - SEPARATE ELEMENT */}
             <div className="relative h-full w-full -rotate-90">
               <Image
-                src="/layer/fan.png"
-                alt=""
                 fill
+                alt=""
                 className="object-contain"
+                src="/layer/fan.png"
               />
             </div>
           </div>

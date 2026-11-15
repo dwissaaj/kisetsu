@@ -1,16 +1,13 @@
 import "@/styles/globals.css";
+
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
-
 import { siteConfig } from "@/config/site";
 import { fontFredoka, fontJapan } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
 import { LenisSmoothScroll } from "@/components/LenisSmoothScroll";
 
-import type { Metadata } from "next";
-import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: {
@@ -82,13 +79,13 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head >
+      <head>
         <link
-  rel="preload"
-  href="/loader/wave.svg"
-  as="image"
-  type="image/svg+xml"
-/>
+          as="image"
+          href="/loader/wave.svg"
+          rel="preload"
+          type="image/svg+xml"
+        />
       </head>
       <body
         className={clsx(

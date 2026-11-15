@@ -20,7 +20,6 @@ export const siteConfig = {
   ],
 };
 
-
 export const NavStackSite = [
   {
     label: "LinkedIn",

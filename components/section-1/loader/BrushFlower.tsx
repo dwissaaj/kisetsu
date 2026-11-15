@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -14,6 +13,7 @@ export default function BrushBackground() {
     fetch("/loader/brush.svg")
       .then((res) => {
         if (!res.ok) throw new Error("Could not load brush.svg");
+
         return res.text();
       })
       .then((markup) => {
@@ -28,9 +28,11 @@ export default function BrushBackground() {
 
   useEffect(() => {
     const container = brushRef.current;
+
     if (!container || !svgMarkup) return;
 
     const svg = container.querySelector("svg");
+
     if (!svg) return;
 
     svg.style.width = "100%";
@@ -48,6 +50,7 @@ export default function BrushBackground() {
     }
 
     const filter = document.createElementNS(ns, "filter");
+
     filter.setAttribute("id", "brush-wave");
     filter.setAttribute("x", "-20%");
     filter.setAttribute("y", "-20%");
@@ -55,16 +58,14 @@ export default function BrushBackground() {
     filter.setAttribute("height", "140%");
 
     const turbulence = document.createElementNS(ns, "feTurbulence");
+
     turbulence.setAttribute("type", "fractalNoise");
     turbulence.setAttribute("baseFrequency", "0.008 0.025");
     turbulence.setAttribute("numOctaves", "2");
     turbulence.setAttribute("seed", "3");
     turbulence.setAttribute("result", "noise");
 
-    const displacement = document.createElementNS(
-      ns,
-      "feDisplacementMap",
-    );
+    const displacement = document.createElementNS(ns, "feDisplacementMap");
 
     displacement.setAttribute("in", "SourceGraphic");
     displacement.setAttribute("in2", "noise");
@@ -83,10 +84,7 @@ export default function BrushBackground() {
       ease: "inOutSine",
       loop: true,
       onUpdate: () => {
-        displacement.setAttribute(
-          "scale",
-          String(distortion.value),
-        );
+        displacement.setAttribute("scale", String(distortion.value));
       },
     });
 
@@ -98,9 +96,9 @@ export default function BrushBackground() {
 
   return (
     <div
+      dangerouslySetInnerHTML={{ __html: svgMarkup }}
       ref={brushRef}
       className="w-full"
-      dangerouslySetInnerHTML={{ __html: svgMarkup }}
     />
   );
 }

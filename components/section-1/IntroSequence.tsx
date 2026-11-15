@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { animate, splitText, stagger } from "animejs";
+
 import WaveLoading from "./loader/WaveLoading";
 import FlowerBackground from "./loader/FlowerBackground";
 
@@ -13,13 +14,16 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
   const introRef = useRef<HTMLDivElement>(null);
   const [showLanding, setShowLanding] = useState(false);
   const textRef = useRef<HTMLParagraphElement>(null);
+
   useEffect(() => {
     const intro = introRef.current;
+
     if (!intro) return;
 
     // Skip the intro for users who prefer reduced motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setShowLanding(true);
+
       return;
     }
 
@@ -39,6 +43,7 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
   }, []);
   useEffect(() => {
     const target = textRef.current;
+
     if (!target) return;
 
     const split = splitText(target, {
@@ -60,6 +65,7 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
       split.revert();
     };
   }, []);
+
   return (
     <>
       {/* Landing page stays mounted underneath */}

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -14,6 +13,7 @@ export default function PetalMove() {
     fetch("/loader/petal.svg")
       .then((res) => {
         if (!res.ok) throw new Error("Could not load flower.svg");
+
         return res.text();
       })
       .then((markup) => {
@@ -28,9 +28,11 @@ export default function PetalMove() {
 
   useEffect(() => {
     const container = flowerRef.current;
+
     if (!container || !svgMarkup) return;
 
     const svg = container.querySelector("svg");
+
     if (!svg) return;
 
     svg.style.width = "100%";
@@ -48,16 +50,14 @@ export default function PetalMove() {
     }
 
     const filter = document.createElementNS(ns, "filter");
+
     filter.setAttribute("id", "flower-wave");
     filter.setAttribute("x", "-20%");
     filter.setAttribute("y", "-20%");
     filter.setAttribute("width", "140%");
     filter.setAttribute("height", "140%");
 
-    const turbulence = document.createElementNS(
-      ns,
-      "feTurbulence"
-    );
+    const turbulence = document.createElementNS(ns, "feTurbulence");
 
     turbulence.setAttribute("type", "fractalNoise");
     turbulence.setAttribute("baseFrequency", "0.012 0.025");
@@ -65,10 +65,7 @@ export default function PetalMove() {
     turbulence.setAttribute("seed", "3");
     turbulence.setAttribute("result", "noise");
 
-    const displacement = document.createElementNS(
-      ns,
-      "feDisplacementMap"
-    );
+    const displacement = document.createElementNS(ns, "feDisplacementMap");
 
     displacement.setAttribute("in", "SourceGraphic");
     displacement.setAttribute("in2", "noise");
@@ -87,10 +84,7 @@ export default function PetalMove() {
       ease: "inOutSine",
       loop: true,
       onUpdate: () => {
-        displacement.setAttribute(
-          "scale",
-          String(distortion.value)
-        );
+        displacement.setAttribute("scale", String(distortion.value));
       },
     });
 
@@ -102,9 +96,9 @@ export default function PetalMove() {
 
   return (
     <div
+      dangerouslySetInnerHTML={{ __html: svgMarkup }}
       ref={flowerRef}
       className="w-full"
-      dangerouslySetInnerHTML={{ __html: svgMarkup }}
     />
   );
 }

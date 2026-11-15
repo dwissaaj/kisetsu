@@ -16,6 +16,7 @@ export default function MattingPad({
 
   useEffect(() => {
     const mat = matRef.current;
+
     if (!mat) return;
 
     const entrance = animate(mat, {

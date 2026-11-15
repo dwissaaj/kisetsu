@@ -43,9 +43,9 @@ export default function NameStack() {
           <React.Fragment key={language.code}>
             <Tooltip delay={0}>
               <Button
-                variant="ghost"
-                size="sm"
                 className="h-auto min-w-0 rounded-sm px-1 py-0 text-xs font-bold text-kisetsu-secondary hover:text-[#FA699E] md:text-sm"
+                size="sm"
+                variant="ghost"
               >
                 {language.code}
               </Button>

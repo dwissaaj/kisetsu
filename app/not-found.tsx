@@ -3,12 +3,13 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { animate, stagger } from "animejs";
+import { animate } from "animejs";
 
 export default function NotFound() {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const left = leftRef.current;
     const right = rightRef.current;
@@ -42,11 +43,11 @@ export default function NotFound() {
     <main className="relative flex min-h-screen w-full items-center justify-center overflow-hidden ">
       {/* Background */}
       <Image
-        src="/error/9.png"
-        alt=""
         fill
         priority
+        alt=""
         className="pointer-events-none object-cover"
+        src="/error/9.png"
       />
 
       {/* Left illustration */}
@@ -55,11 +56,11 @@ export default function NotFound() {
         className="pointer-events-none absolute bottom-0 left-[5%] z-10 h-[65vh] w-[35vw]"
       >
         <Image
-          src="/error/8.png"
-          alt=""
           fill
           priority
+          alt=""
           className="object-contain object-bottom"
+          src="/error/8.png"
         />
       </div>
 
@@ -69,11 +70,11 @@ export default function NotFound() {
         className="pointer-events-none absolute bottom-0 right-[5%] z-10 h-[65vh] w-[35vw]"
       >
         <Image
-          src="/error/7.png"
-          alt=""
           fill
           priority
+          alt=""
           className="object-contain object-bottom"
+          src="/error/7.png"
         />
       </div>
 
@@ -82,9 +83,7 @@ export default function NotFound() {
         ref={contentRef}
         className="relative z-20 flex flex-col items-center font-japan text-old-japan-blue px-6 text-center"
       >
-        <h1 className="text-8xl  tracking-[-0.08em]  md:text-[12rem]">
-          404
-        </h1>
+        <h1 className="text-8xl  tracking-[-0.08em]  md:text-[12rem]">404</h1>
 
         <h2 className="mt-2 text-3xl font-extrabold tracking-tight  md:text-5xl">
           SOMETHING WENT WRONG
@@ -95,8 +94,8 @@ export default function NotFound() {
         </p>
 
         <Link
-          href="/"
           className="mt-10 rounded-full border border-kisetsu-secondary/30 bg-[#FFE8C4]/70 px-8 py-3 text-sm font-bold tracking-wider  backdrop-blur-md transition-all duration-300 hover:bg-[#FA699E] hover:text-white"
+          href="/"
         >
           BACK TO HOME
         </Link>
