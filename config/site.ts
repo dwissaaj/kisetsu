@@ -67,3 +67,20 @@ export const siteConfig = {
     sponsor: "https://patreon.com/jrgarciadev",
   },
 };
+
+
+
+export const NavStackSite = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/dwi-setyo-aji/",
+  },
+  {
+    label: "GDrive",
+    href: "https://drive.google.com/drive/folders/1-uUuKByS1UeplScEoC0kzLU7wpYJs8cs?usp=sharing",
+  },
+  {
+    label: "WhatsApp",
+    href: "https://wa.me/6285251743273?text=%E2%80%8E%20Hi%20Nice%20To%20Meet%20You%0AI%20am",
+  },
+];

@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { animate, splitText, stagger } from "animejs";
-import WaveLoading from "./WaveLoading";
-import FlowerBackground from "./FlowerBackground";
+import WaveLoading from "./loader/WaveLoading";
+import FlowerBackground from "./loader/FlowerBackground";
 
 interface IntroSequenceProps {
   children: ReactNode;
