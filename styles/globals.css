@@ -103,3 +103,32 @@
   --warning: oklch(82.03% 0.1402 45.88);
   --warning-foreground: oklch(21.03% 0.0059 45.88);
 }
+/* Sakura + Wood Scrollbar */
+/* Custom Scrollbar */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #594936;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFE8C4;
+  border: 2px solid #594936;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FA699E;
+}

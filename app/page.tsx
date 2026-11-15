@@ -5,10 +5,12 @@ import MattingPad from "@/components/section-1/Mattingpad";
 import IntroSection from "@/components/section-1/IntroSection";
 import Image from "next/image";
 import LandingScene from "@/components/section-1/loader/LandingScene";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {
   return (
     <IntroSequence>
+        <ScrollIndicator />
       <LandingScene>
         <MattingPad>
           <Image
