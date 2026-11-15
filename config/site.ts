@@ -1,10 +1,24 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Dwis Aji Portfolio",
-  description: "Open to any Job include Video Editing, Data Analyst and Software Development based on Indonesia. Supported Language is Indonesia, English and Japanese",
+  name: "Dwis Aji",
+  title: "Dwis Aji | Video Editor, Developer & Data Analyst",
+  description:
+    "Portfolio of Dwis Aji, an Indonesia-based video editor and developer specializing in video production, frontend development, and data analytics. Explore creative projects, web applications, and data-driven solutions.",
+  keywords: [
+    "Dwis Aji",
+    "Dwis Aji Portfolio",
+    "Video Editor Indonesia",
+    "Freelance Video Editor",
+    "Frontend Developer Indonesia",
+    "React Developer",
+    "Next.js Developer",
+    "Data Analyst Indonesia",
+    "Python Data Analytics",
+    "Social Media Video Editor",
+    "Creative Developer",
+  ],
 };
-
 
 
 export const NavStackSite = [
