@@ -6,11 +6,13 @@ import IntroSection from "@/components/section-1/IntroSection";
 import Image from "next/image";
 import LandingScene from "@/components/section-1/loader/LandingScene";
 import ScrollIndicator from "@/components/ScrollIndicator";
+import BookDecoration from "@/components/section-1/layer/BookDecoration";
+import PatternDecor from "@/components/section-1/layer/PatternDecor";
 
 export default function Home() {
-
   return (
-    <IntroSequence>
+    <main className="h-screen w-full overflow-hidden">
+      <IntroSequence>
         <ScrollIndicator />
       <LandingScene>
         <MattingPad>
@@ -24,8 +26,11 @@ export default function Home() {
           />
         </MattingPad>
 
+        <PatternDecor />
+        <BookDecoration />
         <IntroSection />
       </LandingScene>
-    </IntroSequence>
+      </IntroSequence>
+    </main>
   );
 }

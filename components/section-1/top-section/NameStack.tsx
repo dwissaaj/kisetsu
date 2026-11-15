@@ -20,7 +20,7 @@ const languages = [
 
 export default function NameStack() {
   return (
-    <div className="flex flex-col font-japan">
+    <div className="flex flex-col ">
       <h1 className="text-6xl font-extrabold leading-[0.95] tracking-[-0.06em] text-kisetsu-secondary md:text-7xl">
         DWIS AJI
       </h1>
