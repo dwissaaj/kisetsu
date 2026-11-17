@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useRef, useState, useEffect } from "react";
@@ -66,9 +67,9 @@ export default function NavStack() {
       : "/background/navlight.mp4";
 
   return (
-    <div className="relative z-30 flex w-fit max-w-full items-center justify-self-end gap-2">
+    <div className="relative z-30 flex w-max max-w-full shrink-0 items-center justify-self-end gap-2">
       {/* DESKTOP NAVIGATION */}
-      <nav className="relative isolate hidden h-8 items-center gap-1 overflow-hidden rounded-full border border-white/50 px-2 shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl md:flex">
+      <nav className="relative isolate hidden h-8 w-max shrink-0 flex-nowrap items-center gap-1 overflow-hidden whitespace-nowrap rounded-full  px-2 shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl md:flex">
         {mounted && (
           <video
             key={resolvedTheme}
@@ -84,12 +85,12 @@ export default function NavStack() {
           </video>
         )}
 
-        <div className="pointer-events-none absolute inset-0 z-[1] rounded-full border border-white/30 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]" />
+        <div className="pointer-events-none absolute inset-0 z-[1] rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]" />
 
         {NavStackSite.map((link, index) => (
           <Link
             key={link.label}
-            className="relative z-10 overflow-hidden rounded-full px-2 py-1 text-xs font-semibold text-kisetsu-dark transition-opacity duration-300 hover:opacity-60 dark:text-kisetsu-secondary md:text-sm"
+            className="relative z-10 shrink-0 whitespace-nowrap overflow-hidden rounded-full px-2 py-1 text-xs font-semibold text-kisetsu-dark transition-opacity duration-300 hover:opacity-60 dark:text-kisetsu-secondary md:text-sm"
             href={link.href}
             rel="noopener noreferrer"
             target="_blank"
@@ -100,7 +101,10 @@ export default function NavStack() {
               handleMouseLeave(event.currentTarget, String(index))
             }
           >
-            <span className="nav-title inline-block" data-label={link.label}>
+            <span
+              className="nav-title inline-block whitespace-nowrap"
+              data-label={link.label}
+            >
               {link.label}
             </span>
           </Link>
@@ -108,11 +112,11 @@ export default function NavStack() {
       </nav>
 
       {/* MOBILE CONTACT BUTTON */}
-      <div className="relative h-8 md:hidden">
+      <div className="relative h-8 shrink-0 md:hidden">
         <button
           aria-expanded={isMenuOpen}
           aria-label="Toggle contact menu"
-          className="relative isolate flex h-8 items-center gap-2 overflow-hidden rounded-full border border-white/50 px-4 text-xs font-semibold shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl transition-opacity hover:opacity-70"
+          className="relative isolate flex h-8 shrink-0 items-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-4 text-xs font-semibold shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl transition-opacity hover:opacity-70"
           type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
@@ -152,7 +156,7 @@ export default function NavStack() {
 
         {/* MOBILE DROPDOWN */}
         <div
-          className={`absolute left-full top-0 z-50 ml-3 w-48 origin-top-left overflow-hidden rounded-2xl border border-white/40 shadow-[0_8px_30px_rgba(89,73,54,0.15)] backdrop-blur-2xl transition-all duration-300 ${
+          className={`absolute left-full top-0 z-50 ml-3 w-48 origin-top-left overflow-hidden rounded-2xl  shadow-[0_8px_30px_rgba(89,73,54,0.15)] backdrop-blur-2xl transition-all duration-300 ${
             isMenuOpen
               ? "visible translate-x-0 scale-100 opacity-100"
               : "invisible -translate-x-2 scale-95 opacity-0"
@@ -192,12 +196,12 @@ export default function NavStack() {
       </div>
 
       {/* TECH STATUS */}
-      <div className="flex h-8 shrink-0 items-center">
+      <div className="flex h-4 shrink-0 items-center">
         <TechStatus />
       </div>
 
       {/* THEME SWITCHER */}
-      <div className="flex h-8 shrink-0 items-center">
+      <div className="flex h-4 shrink-0 items-center">
         <ThemeSwitch />
       </div>
     </div>

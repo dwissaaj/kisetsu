@@ -14,17 +14,17 @@ export default function IntroSection() {
         <NameStack />
       </div>
 
-      <div className="row-start-2 min-w-0 justify-self-start md:col-start-2 md:row-start-1 md:justify-self-end">
-        <NavStack />
-      </div>
+<div className="row-start-2 min-w-0 justify-self-start md:col-start-2 md:row-start-1 md:justify-self-end">
+  <NavStack />
+</div>
 
       <div className="row-start-4 min-w-0 w-full self-end justify-self-start md:col-start-1 md:row-start-3 md:w-3/4">
         <NowListening />
       </div>
 
-<div className="row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-full md:justify-self-end">
-  <ParallaxGallery />
-</div>
+      <div className="row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-full md:justify-self-end">
+        <ParallaxGallery />
+      </div>
     </section>
   );
 }

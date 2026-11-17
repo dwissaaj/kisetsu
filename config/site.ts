@@ -37,4 +37,8 @@ export const NavStackSite = [
     label: "Github",
     href: "https://github.com/dwissaaj",
   },
+      {
+    label: "Fastwork",
+    href: "https://fastwork.id/user/dwisaji",
+  },
 ];
