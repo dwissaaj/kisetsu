@@ -1,19 +1,27 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { animate, splitText, stagger } from "animejs";
+import { useTheme } from "next-themes";
+
 import { ThemeSwitch } from "@/components/theme-switch";
 import { NavStackSite } from "@/config/site";
 import TechStatus from "../bottom-section/TechStack";
 
-
 export default function NavStack() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  const { resolvedTheme } = useTheme();
 
   const animations = useRef<Map<string, { cancel: () => unknown }>>(
     new Map(),
   );
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleMouseEnter = (element: HTMLAnchorElement, key: string) => {
     const span = element.querySelector(".nav-title") as HTMLSpanElement;
@@ -52,27 +60,36 @@ export default function NavStack() {
     }
   };
 
+  const backgroundVideo =
+    resolvedTheme === "dark"
+      ? "/background/navdark.mp4"
+      : "/background/navlight.mp4";
+
   return (
-    <div className="relative z-30 flex w-fit max-w-full items-center justify-self-end gap-2 ">
+    <div className="relative z-30 flex w-fit max-w-full items-center justify-self-end gap-2">
       {/* DESKTOP NAVIGATION */}
-      <nav
-        className="relative hidden h-8 items-center gap-1 overflow-hidden rounded-full border border-white/50 px-2 shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl md:flex"
-        style={{
-          backgroundImage: `
-            linear-gradient(135deg, rgba(255,255,255,0.48), rgba(255,255,255,0.12)),
-            url('/background/BgRing.png')
-          `,
-          backgroundSize: "100% 100%",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="pointer-events-none absolute inset-0 rounded-full border border-white/30 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]" />
+      <nav className="relative isolate hidden h-8 items-center gap-1 overflow-hidden rounded-full border border-white/50 px-2 shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl md:flex">
+        {mounted && (
+          <video
+            key={resolvedTheme}
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+            preload="metadata"
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+          >
+            <source src={backgroundVideo} type="video/mp4" />
+          </video>
+        )}
+
+        <div className="pointer-events-none absolute inset-0 z-[1] rounded-full border border-white/30 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)]" />
 
         {NavStackSite.map((link, index) => (
           <Link
             key={link.label}
-            className="text-kisetsu-dark dark:text-kisetsu-secondary relative z-10 overflow-hidden rounded-full px-2 py-1 text-xs font-semibold  transition-opacity duration-300 hover:opacity-60 md:text-sm"
+            className="relative z-10 overflow-hidden rounded-full px-2 py-1 text-xs font-semibold text-kisetsu-dark transition-opacity duration-300 hover:opacity-60 dark:text-kisetsu-secondary md:text-sm"
             href={link.href}
             rel="noopener noreferrer"
             target="_blank"
@@ -95,21 +112,29 @@ export default function NavStack() {
         <button
           aria-expanded={isMenuOpen}
           aria-label="Toggle contact menu"
-          className="flex h-8 items-center gap-2 rounded-full border border-white/50 px-4 text-xs font-semibold  shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl transition-opacity hover:opacity-70"
-          style={{
-            backgroundImage: `
-              linear-gradient(135deg, rgba(255,255,255,0.48), rgba(255,255,255,0.12)),
-              url('/background/BgRing.png')
-            `,
-            backgroundSize: "100% 100%",
-            backgroundPosition: "center",
-          }}
+          className="relative isolate flex h-8 items-center gap-2 overflow-hidden rounded-full border border-white/50 px-4 text-xs font-semibold shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl transition-opacity hover:opacity-70"
           type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          Contact
+          {mounted && (
+            <video
+              key={resolvedTheme}
+              autoPlay
+              loop
+              muted
+              playsInline
+              aria-hidden="true"
+              preload="metadata"
+              className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+            >
+              <source src={backgroundVideo} type="video/mp4" />
+            </video>
+          )}
+
+          <span className="relative z-10">Contact</span>
+
           <svg
-            className={`h-3 w-3 transition-transform duration-300 ${
+            className={`relative z-10 h-3 w-3 transition-transform duration-300 ${
               isMenuOpen ? "rotate-180" : ""
             }`}
             fill="none"
@@ -132,20 +157,27 @@ export default function NavStack() {
               ? "visible translate-x-0 scale-100 opacity-100"
               : "invisible -translate-x-2 scale-95 opacity-0"
           }`}
-          style={{
-            backgroundImage: `
-              linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.2)),
-              url('/background/BgRing.png')
-            `,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
         >
-          <div className="flex flex-col p-2">
+          {mounted && (
+            <video
+              key={resolvedTheme}
+              autoPlay
+              loop
+              muted
+              playsInline
+              aria-hidden="true"
+              preload="metadata"
+              className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+            >
+              <source src={backgroundVideo} type="video/mp4" />
+            </video>
+          )}
+
+          <div className="relative z-10 flex flex-col p-2">
             {NavStackSite.map((link) => (
               <Link
                 key={link.label}
-                className="rounded-xl px-4 py-3 text-xs font-semibold  transition-colors hover:bg-white/20"
+                className="rounded-xl px-4 py-3 text-xs font-semibold text-kisetsu-dark transition-colors hover:bg-white/20 dark:text-kisetsu-secondary"
                 href={link.href}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -159,14 +191,13 @@ export default function NavStack() {
         </div>
       </div>
 
-      {/* THEME SWITCHER */}
-
-
       {/* TECH STATUS */}
       <div className="flex h-8 shrink-0 items-center">
         <TechStatus />
       </div>
-            <div className="flex h-8 shrink-0 items-center">
+
+      {/* THEME SWITCHER */}
+      <div className="flex h-8 shrink-0 items-center">
         <ThemeSwitch />
       </div>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+import Image from "next/image";
 
 interface LandingSceneProps {
   children?: ReactNode;
@@ -16,11 +17,14 @@ export default function LandingScene({
       className={`relative isolate h-dvh w-full overflow-hidden ${className}`}
     >
       {/* Wooden background */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/background/6.png')",
-        }}
+      <Image
+        src="/background/6.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        quality={90}
+        className="pointer-events-none z-0 object-cover object-center"
       />
 
       {/* Moving shadow video */}

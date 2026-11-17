@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { animate } from "animejs";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 import {
   Carousel,
@@ -46,11 +47,17 @@ const technologies = [
 export default function TechStatus() {
   const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   const textRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLSpanElement>(null);
 
+  const { resolvedTheme } = useTheme();
   const active = technologies[activeIndex];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Track active carousel item
   useEffect(() => {
@@ -104,47 +111,60 @@ export default function TechStatus() {
   }, [activeIndex]);
 
   return (
-    <div className="relative flex items-center gap-2 overflow-hidden rounded-full border border-white/30  px-3 py-1.5">
-      {/* Animated video background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
-      >
-        <source src="/background/bgStatus.mp4" type="video/mp4" />
-      </video>
+    <div className="relative isolate flex items-center gap-2 overflow-hidden rounded-full border border-white/30 px-3 py-1.5">
+
+      {/* Theme-dependent video background */}
+      {mounted && (
+        <video
+          key={resolvedTheme}
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+          preload="metadata"
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+        >
+          <source
+            src={
+              resolvedTheme === "dark"
+                ? "/background/dark.mp4"
+                : "/background/light.mp4"
+            }
+            type="video/mp4"
+          />
+        </video>
+      )}
 
       {/* Technology carousel */}
-      <Carousel
-        className="w-38"
-        opts={{
-          loop: true,
-          align: "center",
-        }}
-        setApi={setApi}
-      >
-        <CarouselContent className="ml-0">
-          {technologies.map((tech) => (
-            <div
-              key={tech.id}
-              ref={tech.name === active.name ? textRef : undefined}
-            >
-              <Link
+      <div className="relative z-10">
+        <Carousel
+          className="w-38"
+          opts={{
+            loop: true,
+            align: "center",
+          }}
+          setApi={setApi}
+        >
+          <CarouselContent className="ml-0">
+            {technologies.map((tech) => (
+              <div
                 key={tech.id}
-                className="flex w-full items-center justify-center whitespace-nowrap px-4 text-xs text-kisetsu-dark dark:text-kisetsu-secondary font-semi transition-opacity hover:opacity-70"
-                href={tech.href}
-                rel="noopener noreferrer"
-                target="_blank"
+                ref={tech.name === active.name ? textRef : undefined}
               >
-                {tech.name} ↗
-              </Link>
-            </div>
-          ))}
-        </CarouselContent>
-      </Carousel>
+                <Link
+                  className="flex w-full items-center justify-center whitespace-nowrap px-4 text-xs font-semibold text-kisetsu-dark transition-opacity hover:opacity-70 dark:text-kisetsu-secondary"
+                  href={tech.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {tech.name} ↗
+                </Link>
+              </div>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
     </div>
   );
 }

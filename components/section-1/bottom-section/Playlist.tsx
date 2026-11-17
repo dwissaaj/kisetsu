@@ -5,17 +5,24 @@ import { useEffect, useState, useRef } from "react";
 import { Button, Slider, Tooltip } from "@heroui/react";
 import { Disc3, Heart, PauseIcon, SkipBack, SkipForward } from "lucide-react";
 import { animate } from "animejs";
-
+import { useTheme } from "next-themes";
 import PlaylistSheet from "./PlaylistSheet";
 
 import { Songplaylist } from "@/config/playlist";
+
 const AUTO_SLIDE_INTERVAL = 5000;
 
 export default function NowListening() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(23);
+  const [mounted, setMounted] = useState(false);
 
+  const { resolvedTheme } = useTheme();
   const currentSong = Songplaylist[currentIndex];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const selectSong = (index: number) => {
     setCurrentIndex(index);
@@ -42,6 +49,7 @@ export default function NowListening() {
 
     return () => clearInterval(interval);
   }, []);
+
   const playlistRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -73,17 +81,27 @@ export default function NowListening() {
       className="relative isolate box-border w-full max-w-[480px] overflow-hidden rounded-xl border border-[#594936]/15 p-3 shadow-md"
     >
       {/* Background MP4 */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
-        preload="metadata"
-      >
-        <source src="/album/bgplaylist.mp4" type="video/mp4" />
-      </video>
+      {mounted && (
+        <video
+          key={resolvedTheme}
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
+          preload="metadata"
+        >
+          <source
+            src={
+              resolvedTheme === "dark"
+                ? "/album/playlistDark.mp4"
+                : "/album/playlistLight.mp4"
+            }
+            type="video/mp4"
+          />
+        </video>
+      )}
 
       {/* Background overlay */}
       <div className="pointer-events-none absolute inset-0 -z-10" />
@@ -91,7 +109,10 @@ export default function NowListening() {
       {/* Header */}
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Disc3 className="text-kisetsu-dark dark:text-kisetsu-secondary" size={16} />
+          <Disc3
+            className="text-kisetsu-dark dark:text-kisetsu-secondary"
+            size={16}
+          />
 
           <h3 className="text-xs font-bold uppercase tracking-wider text-kisetsu-dark dark:text-kisetsu-secondary">
             My Playlist
@@ -115,7 +136,7 @@ export default function NowListening() {
               />
             </Tooltip.Trigger>
 
-            <Tooltip.Content className="max-w-64 rounded-xl p-3 ">
+            <Tooltip.Content className="max-w-64 rounded-xl p-3">
               <div className="space-y-2">
                 <p className="text-xs font-semibold dark:text-kisetsu-secondary">
                   Copyright Notice
@@ -180,13 +201,13 @@ export default function NowListening() {
             <SkipForward size={16} />
           </Button>
 
-          <Heart className="ml-1 hidden shrink-0  sm:block" size={16} />
+          <Heart className="ml-1 hidden shrink-0 sm:block" size={16} />
         </div>
       </div>
 
       {/* Static music-style progress slider */}
       <div className="mt-3 flex w-full items-center gap-2 text-kisetsu-dark dark:text-kisetsu-secondary">
-        <span className="shrink-0 text-[9px] tabular-nums /55">00:52</span>
+        <span className="shrink-0 text-[9px] tabular-nums">00:52</span>
 
         <Slider
           aria-label="Song progress"

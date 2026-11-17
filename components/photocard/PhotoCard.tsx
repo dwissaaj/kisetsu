@@ -43,16 +43,16 @@ export default function PhotoCard({
       <Card.Content className="flex flex-row items-center justify-between gap-2 font-fredoka">
         <Button
           aria-label={liked ? "Unlike photo" : "Like photo"}
-          className="shrink-0 px-2 font-bold"
+          className="shrink-0 px-2 font-bold hover:bg-accent"
           size="sm"
           variant="ghost"
           onPress={() => setLiked((prev) => !prev)}
         >
           <Heart
-            className={liked ? "fill-rose-500 text-rose-500" : ""}
+            className={liked ? "fill-rose-500 text-rose-500 " : "text-kisetsu-dark dark:text-kisetsu-secondary"}
             size={22}
           />
-          <span>{initialLikes + (liked ? 1 : 0)}</span>
+          <span className="text-kisetsu-dark dark:text-kisetsu-secondary">{initialLikes + (liked ? 1 : 0)}</span>
         </Button>
 
         <p className="min-w-0 flex-1 truncate text-base font-medium leading-relaxed">
