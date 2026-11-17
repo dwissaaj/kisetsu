@@ -28,10 +28,10 @@ export default function BookDecoration() {
 
     // FAN: RIGHT TO LEFT (HORIZONTAL)
     const fanAnimation = animate(fan, {
-      translateX: ["150%", "0%"],
+      translateX: ["100%", "0%"],
       opacity: [0, 1],
       duration: 1800,
-      delay: 5000,
+      delay: 100,
       ease: "out(3)",
     });
 
@@ -86,7 +86,7 @@ export default function BookDecoration() {
   return (
     <>
       {/* BOOK - TOP CENTER */}
-      <div className="hidden lg:block pointer-events-none fixed left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2">
+      <div className="hidden md:block pointer-events-none fixed left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2">
         <div
           ref={bookHoverRef}
           className="pointer-events-auto cursor-pointer"
@@ -116,7 +116,7 @@ export default function BookDecoration() {
       </div>
 
       {/* FAN - RIGHT CENTER */}
-      <div className="hidden lg:block pointer-events-none fixed right-[-12%] top-1/2 z-20 -translate-y-1/2">
+      <div className="hidden md:block pointer-events-none fixed right-[-12%] top-1/2 z-20 -translate-y-1/2">
         <div
           ref={fanHoverRef}
           className="pointer-events-auto cursor-pointer"
@@ -140,7 +140,7 @@ export default function BookDecoration() {
               <Image
                 fill
                 alt=""
-                className="object-contain"
+                className="object-contain rotate-90"
                 src="/layer/fan.png"
               />
             </div>
