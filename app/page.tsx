@@ -10,7 +10,7 @@ import PatternDecor from "@/components/section-1/layer/PatternDecor";
 
 export default function Home() {
   return (
-    <main className="h-screen w-full overflow-hidden">
+    <main className="h-screen w-full ">
 
         <ScrollIndicator />
         <LandingScene>

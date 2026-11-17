@@ -16,13 +16,13 @@ export default function IntroSection() {
         <NavStack />
       </div>
 
-<div className="row-start-4 min-w-0 w-full self-end justify-self-start md:col-start-1 md:row-start-3 md:w-3/4">
-  <NowListening />
-</div>
+      <div className="row-start-4 min-w-0 w-full self-end justify-self-start md:col-start-1 md:row-start-3 md:w-3/4">
+        <NowListening />
+      </div>
 
-<div className="row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-fit md:max-w-full md:justify-self-end">
-  <TechStatus />
-</div>
+      <div className="row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-fit md:max-w-full md:justify-self-end">
+        <TechStatus />
+      </div>
     </section>
   );
 }

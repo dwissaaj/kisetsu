@@ -31,7 +31,7 @@ export default function BookDecoration() {
       translateX: ["100%", "0%"],
       opacity: [0, 1],
       duration: 1800,
-      delay: 100,
+      delay: 5000,
       ease: "out(3)",
     });
 

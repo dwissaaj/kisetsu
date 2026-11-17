@@ -114,7 +114,7 @@ export default function TechStatus() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
       >
-        <source src="/background/bgstatus.mp4" type="video/mp4" />
+        <source src="/background/bgStatus.mp4" type="video/mp4" />
       </video>
 
       {/* Technology carousel */}

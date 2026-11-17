@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Button, Sheet, Slider } from "@heroui/react";
+import { Button, Sheet, Slider, Tooltip } from "@heroui/react";
 import {
   Disc3,
   Heart,
@@ -11,8 +11,7 @@ import {
   SkipBack,
   SkipForward,
 } from "lucide-react";
-import { playlist } from "@/config/playlist";
-
+import { Songplaylist } from "@/config/playlist";
 
 const AUTO_SLIDE_INTERVAL = 5000;
 
@@ -20,7 +19,7 @@ export default function NowListening() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(23);
 
-  const currentSong = playlist[currentIndex];
+  const currentSong = Songplaylist[currentIndex];
 
   const selectSong = (index: number) => {
     setCurrentIndex(index);
@@ -28,13 +27,13 @@ export default function NowListening() {
   };
 
   const nextSong = () => {
-    setCurrentIndex((prev) => (prev + 1) % playlist.length);
+    setCurrentIndex((prev) => (prev + 1) % Songplaylist.length);
     setProgress(23);
   };
 
   const previousSong = () => {
     setCurrentIndex(
-      (prev) => (prev - 1 + playlist.length) % playlist.length,
+      (prev) => (prev - 1 + Songplaylist.length) % Songplaylist.length,
     );
     setProgress(23);
   };
@@ -42,7 +41,7 @@ export default function NowListening() {
   // 5-second carousel
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % playlist.length);
+      setCurrentIndex((prev) => (prev + 1) % Songplaylist.length);
     }, AUTO_SLIDE_INTERVAL);
 
     return () => clearInterval(interval);
@@ -60,18 +59,18 @@ export default function NowListening() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
       >
-        <source src="/videos/player-bg.mp4" type="video/mp4" />
+        <source src="/album/bgplaylist.mp4" type="video/mp4" />
       </video>
 
       {/* Background overlay */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[#FFE8C4]/75" />
+      <div className="pointer-events-none absolute inset-0 -z-10" />
 
       {/* Header */}
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Disc3 size={16} className="text-[#FA699E]" />
+          <Disc3 size={16} className="" />
 
-          <h3 className="text-xs font-bold uppercase tracking-wider text-[#594936]">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-kisetsu-secondary">
             My Playlist
           </h3>
         </div>
@@ -86,7 +85,7 @@ export default function NowListening() {
               aria-label="Open playlist"
               className="shrink-0 text-[#594936] hover:text-[#FA699E]"
             >
-              <ListMusic size={17} />
+              <ListMusic size={17} className="text-accent" />
             </Button>
           </Sheet.Trigger>
 
@@ -104,7 +103,7 @@ export default function NowListening() {
 
                 <Sheet.Body>
                   <div className="flex flex-col gap-2">
-                    {playlist.map((song, index) => {
+                    {Songplaylist.map((song, index) => {
                       const isActive = currentIndex === index;
 
                       return (
@@ -119,22 +118,52 @@ export default function NowListening() {
                                 : "hover:bg-[#594936]/5"
                             }`}
                           >
-                            <Image
-                              src={song.image}
-                              alt={song.song}
-                              width={44}
-                              height={44}
-                              className="size-11 shrink-0 rounded-lg object-cover"
-                            />
+                            <Tooltip>
+                              <Tooltip.Trigger>
+                                <div className="size-11 shrink-0">
+                                  <Image
+                                    src={song.image}
+                                    alt={song.song}
+                                    width={44}
+                                    height={44}
+                                    className="size-11 rounded-lg object-cover"
+                                  />
+                                </div>
+                              </Tooltip.Trigger>
 
-                            <div className="min-w-0 flex-1 text-left">
-                              <p className="truncate text-sm font-semibold text-[#594936]">
+                              <Tooltip.Content className="max-w-64 rounded-xl p-3">
+                                <div className="space-y-2">
+                                  <p className="text-xs font-semibold text-[#594936]">
+                                    Copyright Notice
+                                  </p>
+
+                                  <p className="text-[11px] leading-relaxed text-[#594936]/75">
+                                    Album artwork belongs to its respective
+                                    artist and copyright holders. Images are
+                                    displayed for music identification and
+                                    informational purposes.
+                                  </p>
+
+                                  <p className="text-[11px] leading-relaxed text-[#594936]/75">
+                                    Fair Use (Section 107, U.S. Copyright Act)
+                                    may apply depending on the circumstances.
+                                    This notice does not itself establish
+                                    permission or fair use.
+                                  </p>
+
+                                  <p className="text-[10px] font-medium text-[#FA699E]">
+                                    Artwork source: Artist's official Instagram.
+                                  </p>
+                                </div>
+                              </Tooltip.Content>
+                            </Tooltip>
+
+                            <div className="min-w-0 flex-1 text-left font-japan">
+                              <p className="truncate text-sm font-semibold ">
                                 {song.song}
                               </p>
 
-                              <p className="truncate text-xs text-[#594936]/60">
-                                {song.singer}
-                              </p>
+                              <p className="truncate text-xs ">{song.singer}</p>
                             </div>
 
                             {isActive && (
@@ -165,44 +194,71 @@ export default function NowListening() {
 
       {/* Current song */}
       <div className="flex min-w-0 items-center gap-3">
-        <Image
-          src={currentSong.image}
-          alt={currentSong.song}
-          width={56}
-          height={56}
-          className="size-11 shrink-0 rounded-lg object-cover sm:size-14"
-        />
+        <div className="flex min-w-0 items-center gap-3">
+          <Tooltip>
+            <Tooltip.Trigger>
+              <Image
+                src={currentSong.image}
+                alt={currentSong.song}
+                width={56}
+                height={56}
+                className="size-11 shrink-0 rounded-lg object-cover sm:size-14"
+              />
+            </Tooltip.Trigger>
 
-        <div className="w-0 min-w-0 flex-1 overflow-hidden">
-          <p className="mb-1 text-[10px] font-medium uppercase tracking-widest text-[#594936]/55">
+            <Tooltip.Content className="max-w-64 rounded-xl p-3">
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-[#594936]">
+                  Copyright Notice
+                </p>
+
+                <p className="text-[11px] leading-relaxed text-[#594936]/75">
+                  Album artwork belongs to its respective artist and copyright
+                  holders. Images are displayed for music identification and
+                  informational purposes.
+                </p>
+
+                <p className="text-[11px] leading-relaxed text-[#594936]/75">
+                  Fair Use (Section 107, U.S. Copyright Act) may apply depending
+                  on the circumstances. This notice does not itself establish
+                  permission or fair use.
+                </p>
+
+                <p className="text-[10px] font-medium text-[#FA699E]">
+                  Artwork source: Artist's official Instagram.
+                </p>
+              </div>
+            </Tooltip.Content>
+          </Tooltip>
+        </div>
+
+        <div className="w-0 min-w-0 flex-1 overflow-hidden font-japan">
+          <p className="mb-1 text-[10px] font-medium uppercase tracking-widest text-kisetsu-secondary">
             Now Listening
           </p>
 
-          <h3 className="truncate text-sm font-bold text-[#594936]">
+          <h3 className="truncate text-sm font-semibold text-kisetsu-secondary">
             {currentSong.song}
           </h3>
 
-          <p className="truncate text-xs text-[#594936]/65">
+          <p className="truncate text-xs font-bold text-kisetsu-secondary">
             {currentSong.singer}
           </p>
         </div>
 
-        <div className="flex shrink-0 items-center gap-1">
+        <div className="flex shrink-0 items-center gap-1 text-kisetsu-muted">
           <Button
             isIconOnly
             size="sm"
             variant="ghost"
             aria-label="Previous song"
             onPress={previousSong}
-            className="text-[#594936]"
+            className="text-kisetsu-muted"
           >
             <SkipBack size={16} />
           </Button>
 
-          <PauseIcon
-            className="ml-1 hidden shrink-0 sm:block"
-            size={16}
-          />
+          <PauseIcon className="ml-1 hidden shrink-0 sm:block" size={16} />
 
           <Button
             isIconOnly
@@ -210,23 +266,18 @@ export default function NowListening() {
             variant="ghost"
             aria-label="Next song"
             onPress={nextSong}
-            className="text-[#594936]"
+            className="text-kisetsu-muted"
           >
             <SkipForward size={16} />
           </Button>
 
-          <Heart
-            size={16}
-            className="ml-1 hidden shrink-0 text-[#FA699E] sm:block"
-          />
+          <Heart size={16} className="ml-1 hidden shrink-0  sm:block" />
         </div>
       </div>
 
       {/* Static music-style progress slider */}
-      <div className="mt-3 flex w-full items-center gap-2">
-        <span className="shrink-0 text-[9px] tabular-nums text-[#594936]/55">
-          00:52
-        </span>
+      <div className="mt-3 flex w-full items-center gap-2 text-kisetsu-secondary">
+        <span className="shrink-0 text-[9px] tabular-nums /55">00:52</span>
 
         <Slider
           aria-label="Song progress"
@@ -235,13 +286,13 @@ export default function NowListening() {
           maxValue={100}
           className="min-w-0 w-full flex-1"
         >
-          <Slider.Track className="h-1 w-full rounded-full bg-[#594936]/15">
+          <Slider.Track className="h-1 w-full rounded-full bg-kisetsu-dark/15">
             <Slider.Fill className="rounded-full bg-[#FA699E]" />
             <Slider.Thumb className="size-2.5 border-2 border-[#FFE8C4] bg-[#FA699E] shadow-sm" />
           </Slider.Track>
         </Slider>
 
-        <span className="shrink-0 text-[9px] tabular-nums text-[#594936]/55">
+        <span className="shrink-0 text-[9px] tabular-nums text-kisetsu-secondary">
           03:45
         </span>
       </div>
