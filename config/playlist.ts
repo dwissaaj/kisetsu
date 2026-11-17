@@ -49,5 +49,4 @@ export const Songplaylist = [
     song: "Teenage Blue",
     image: "/album/10.png",
   },
-  
 ];

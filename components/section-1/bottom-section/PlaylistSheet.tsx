@@ -20,12 +20,12 @@ export default function PlaylistSheet({
       <Sheet.Trigger>
         <Button
           isIconOnly
-          size="sm"
-          variant="ghost"
           aria-label="Open playlist"
           className="shrink-0 text-[#594936] hover:text-[#FA699E]"
+          size="sm"
+          variant="ghost"
         >
-          <ListMusic size={17} className="text-accent" />
+          <ListMusic className="text-accent" size={17} />
         </Button>
       </Sheet.Trigger>
 
@@ -49,24 +49,22 @@ export default function PlaylistSheet({
                   return (
                     <Sheet.Close key={song.song}>
                       <Button
+                        className={`flex h-auto w-full items-center justify-start gap-3 rounded-xl p-2 text-left ${
+                          isActive ? "bg-[#FA699E]/15" : "hover:bg-[#594936]/5"
+                        }`}
                         type="button"
                         variant="ghost"
                         onPress={() => onSelectSong(index)}
-                        className={`flex h-auto w-full items-center justify-start gap-3 rounded-xl p-2 text-left ${
-                          isActive
-                            ? "bg-[#FA699E]/15"
-                            : "hover:bg-[#594936]/5"
-                        }`}
                       >
                         <Tooltip>
                           <Tooltip.Trigger>
                             <div className="size-11 shrink-0">
                               <Image
-                                src={song.image}
                                 alt={song.song}
-                                width={44}
-                                height={44}
                                 className="size-11 rounded-lg object-cover"
+                                height={44}
+                                src={song.image}
+                                width={44}
                               />
                             </div>
                           </Tooltip.Trigger>
@@ -91,7 +89,8 @@ export default function PlaylistSheet({
                               </p>
 
                               <p className="text-[10px] font-medium text-[#FA699E]">
-                                Artwork source: Artist's official Instagram.
+                                Artwork source: Artist&apos;s official
+                                Instagram.
                               </p>
                             </div>
                           </Tooltip.Content>
@@ -107,8 +106,8 @@ export default function PlaylistSheet({
 
                         {isActive && (
                           <Disc3
-                            size={17}
                             className="shrink-0 text-[#FA699E]"
+                            size={17}
                           />
                         )}
                       </Button>

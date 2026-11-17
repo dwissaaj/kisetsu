@@ -17,8 +17,7 @@ export default function AnimatedWave() {
       })
       .then((markup) => {
         if (!cancelled) setSvgMarkup(markup);
-      })
-      .catch(console.error);
+      });
 
     return () => {
       cancelled = true;

@@ -1,19 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState , useRef} from "react";
-import { Button, Sheet, Slider, Tooltip } from "@heroui/react";
-import {
-  Disc3,
-  Heart,
-  ListMusic,
-  PauseIcon,
-  SkipBack,
-  SkipForward,
-} from "lucide-react";
-import { Songplaylist } from "@/config/playlist";
-import PlaylistSheet from "./PlaylistSheet";
+import { useEffect, useState, useRef } from "react";
+import { Button, Slider, Tooltip } from "@heroui/react";
+import { Disc3, Heart, PauseIcon, SkipBack, SkipForward } from "lucide-react";
 import { animate } from "animejs";
+
+import PlaylistSheet from "./PlaylistSheet";
+
+import { Songplaylist } from "@/config/playlist";
 const AUTO_SLIDE_INTERVAL = 5000;
 
 export default function NowListening() {
@@ -47,44 +42,45 @@ export default function NowListening() {
 
     return () => clearInterval(interval);
   }, []);
-const playlistRef = useRef<HTMLElement>(null);
+  const playlistRef = useRef<HTMLElement>(null);
 
-useEffect(() => {
-  const element = playlistRef.current;
+  useEffect(() => {
+    const element = playlistRef.current;
 
-  if (!element) return;
+    if (!element) return;
 
-  // Respect reduced-motion preferences.
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return;
-  }
+    // Respect reduced-motion preferences.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
 
-  const animation = animate(element, {
-    opacity: [0, 1],
-    translateY: ["30px", "0px"],
-    duration: 1000,
-    delay: 10000,
-    ease: "out(3)",
-  });
+    const animation = animate(element, {
+      opacity: [0, 1],
+      translateY: ["30px", "0px"],
+      duration: 1000,
+      delay: 10000,
+      ease: "out(3)",
+    });
 
-  return () => {
-    animation.revert();
-  };
-}, []);
+    return () => {
+      animation.revert();
+    };
+  }, []);
+
   return (
-   <section
-  ref={playlistRef}
-  className="relative isolate box-border w-full max-w-[480px] overflow-hidden rounded-xl border border-[#594936]/15 p-3 shadow-md"
->
+    <section
+      ref={playlistRef}
+      className="relative isolate box-border w-full max-w-[480px] overflow-hidden rounded-xl border border-[#594936]/15 p-3 shadow-md"
+    >
       {/* Background MP4 */}
       <video
         autoPlay
-        muted
         loop
+        muted
         playsInline
-        preload="metadata"
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 size-full object-cover"
+        preload="metadata"
       >
         <source src="/album/bgplaylist.mp4" type="video/mp4" />
       </video>
@@ -95,7 +91,7 @@ useEffect(() => {
       {/* Header */}
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Disc3 size={16} className="" />
+          <Disc3 className="" size={16} />
 
           <h3 className="text-xs font-bold uppercase tracking-wider text-kisetsu-secondary">
             My Playlist
@@ -111,11 +107,11 @@ useEffect(() => {
           <Tooltip>
             <Tooltip.Trigger>
               <Image
-                src={currentSong.image}
                 alt={currentSong.song}
-                width={56}
-                height={56}
                 className="size-11 shrink-0 rounded-lg object-cover sm:size-14"
+                height={56}
+                src={currentSong.image}
+                width={56}
               />
             </Tooltip.Trigger>
 
@@ -138,7 +134,7 @@ useEffect(() => {
                 </p>
 
                 <p className="text-[10px] font-medium text-[#FA699E]">
-                  Artwork source: Artist's official Instagram.
+                  Artwork source: Artist&apos;s official Instagram.
                 </p>
               </div>
             </Tooltip.Content>
@@ -162,11 +158,11 @@ useEffect(() => {
         <div className="flex shrink-0 items-center gap-1 text-kisetsu-muted">
           <Button
             isIconOnly
+            aria-label="Previous song"
+            className="text-kisetsu-muted"
             size="sm"
             variant="ghost"
-            aria-label="Previous song"
             onPress={previousSong}
-            className="text-kisetsu-muted"
           >
             <SkipBack size={16} />
           </Button>
@@ -175,16 +171,16 @@ useEffect(() => {
 
           <Button
             isIconOnly
+            aria-label="Next song"
+            className="text-kisetsu-muted"
             size="sm"
             variant="ghost"
-            aria-label="Next song"
             onPress={nextSong}
-            className="text-kisetsu-muted"
           >
             <SkipForward size={16} />
           </Button>
 
-          <Heart size={16} className="ml-1 hidden shrink-0  sm:block" />
+          <Heart className="ml-1 hidden shrink-0  sm:block" size={16} />
         </div>
       </div>
 
@@ -194,10 +190,10 @@ useEffect(() => {
 
         <Slider
           aria-label="Song progress"
-          value={progress}
-          minValue={0}
-          maxValue={100}
           className="min-w-0 w-full flex-1"
+          maxValue={100}
+          minValue={0}
+          value={progress}
         >
           <Slider.Track className="h-1 w-full rounded-full bg-kisetsu-dark/15">
             <Slider.Fill className="rounded-full bg-[#FA699E]" />

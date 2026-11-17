@@ -14,8 +14,6 @@ export default function Error({
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.error(error);
-
     const content = contentRef.current;
 
     if (!content) return;

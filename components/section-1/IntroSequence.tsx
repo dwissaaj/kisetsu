@@ -82,14 +82,14 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
 
           {/* MP4 texture overlay */}
           <video
-            className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-20"
-            src="/background/bgsequence.mp4"
             autoPlay
-            muted
             loop
+            muted
             playsInline
-            preload="auto"
             aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-20"
+            preload="auto"
+            src="/background/bgsequence.mp4"
           />
 
           <div className="relative z-10 flex flex-col items-center gap-8">

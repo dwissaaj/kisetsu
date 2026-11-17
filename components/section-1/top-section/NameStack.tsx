@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { animate, splitText, stagger } from "animejs";
-
-import { languages } from "@/config/lang";
 import { Button, Tooltip } from "@heroui/react";
 import React from "react";
+
+import { languages } from "@/config/lang";
 
 export default function NameStack() {
   const nameRef = useRef<HTMLHeadingElement>(null);

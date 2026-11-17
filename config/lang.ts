@@ -1,5 +1,4 @@
-export 
-const languages = [
+export const languages = [
   {
     code: "IDN",
     description: "Indonesian — Native speaker",

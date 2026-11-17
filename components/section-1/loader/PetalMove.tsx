@@ -18,8 +18,7 @@ export default function PetalMove() {
       })
       .then((markup) => {
         if (!cancelled) setSvgMarkup(markup);
-      })
-      .catch(console.error);
+      });
 
     return () => {
       cancelled = true;
