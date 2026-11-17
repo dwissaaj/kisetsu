@@ -3,13 +3,17 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { animate, splitText, stagger } from "animejs";
-
+import { ThemeSwitch } from "@/components/theme-switch";
 import { NavStackSite } from "@/config/site";
+import TechStatus from "../bottom-section/TechStack";
+
 
 export default function NavStack() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const animations = useRef<Map<string, { cancel: () => unknown }>>(new Map());
+  const animations = useRef<Map<string, { cancel: () => unknown }>>(
+    new Map(),
+  );
 
   const handleMouseEnter = (element: HTMLAnchorElement, key: string) => {
     const span = element.querySelector(".nav-title") as HTMLSpanElement;
@@ -49,10 +53,10 @@ export default function NavStack() {
   };
 
   return (
-    <div className="relative z-30 w-fit max-w-full justify-self-end">
+    <div className="relative z-30 flex w-fit max-w-full items-center justify-self-end gap-2 ">
       {/* DESKTOP NAVIGATION */}
       <nav
-        className="relative hidden items-center gap-2 overflow-hidden rounded-full border border-white/50 px-4 py-1 shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl md:flex"
+        className="relative hidden h-8 items-center gap-1 overflow-hidden rounded-full border border-white/50 px-2 shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl md:flex"
         style={{
           backgroundImage: `
             linear-gradient(135deg, rgba(255,255,255,0.48), rgba(255,255,255,0.12)),
@@ -68,7 +72,7 @@ export default function NavStack() {
         {NavStackSite.map((link, index) => (
           <Link
             key={link.label}
-            className="relative z-10 overflow-hidden rounded-full px-2 py-1 text-xs font-semibold text-white transition-opacity duration-300 hover:opacity-60 md:text-sm"
+            className="text-kisetsu-dark dark:text-kisetsu-secondary relative z-10 overflow-hidden rounded-full px-2 py-1 text-xs font-semibold  transition-opacity duration-300 hover:opacity-60 md:text-sm"
             href={link.href}
             rel="noopener noreferrer"
             target="_blank"
@@ -87,11 +91,11 @@ export default function NavStack() {
       </nav>
 
       {/* MOBILE CONTACT BUTTON */}
-      <div className="relative md:hidden">
+      <div className="relative h-8 md:hidden">
         <button
           aria-expanded={isMenuOpen}
           aria-label="Toggle contact menu"
-          className="flex items-center gap-2 rounded-full border border-white/50 px-4 py-2 text-xs font-semibold text-white shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl transition-opacity hover:opacity-70"
+          className="flex h-8 items-center gap-2 rounded-full border border-white/50 px-4 text-xs font-semibold  shadow-[0_8px_30px_rgba(89,73,54,0.12)] backdrop-blur-2xl transition-opacity hover:opacity-70"
           style={{
             backgroundImage: `
               linear-gradient(135deg, rgba(255,255,255,0.48), rgba(255,255,255,0.12)),
@@ -141,7 +145,7 @@ export default function NavStack() {
             {NavStackSite.map((link) => (
               <Link
                 key={link.label}
-                className="rounded-xl px-4 py-3 text-xs font-semibold text-white transition-colors hover:bg-white/20"
+                className="rounded-xl px-4 py-3 text-xs font-semibold  transition-colors hover:bg-white/20"
                 href={link.href}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -153,6 +157,17 @@ export default function NavStack() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* THEME SWITCHER */}
+
+
+      {/* TECH STATUS */}
+      <div className="flex h-8 shrink-0 items-center">
+        <TechStatus />
+      </div>
+            <div className="flex h-8 shrink-0 items-center">
+        <ThemeSwitch />
       </div>
     </div>
   );

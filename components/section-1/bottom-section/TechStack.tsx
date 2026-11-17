@@ -104,7 +104,7 @@ export default function TechStatus() {
   }, [activeIndex]);
 
   return (
-    <div className="relative flex items-center gap-2 overflow-hidden rounded-full border border-white/30 px-3 py-1.5">
+    <div className="relative flex items-center gap-2 overflow-hidden rounded-full border border-white/30  px-3 py-1.5">
       {/* Animated video background */}
       <video
         autoPlay
@@ -134,7 +134,7 @@ export default function TechStatus() {
             >
               <Link
                 key={tech.id}
-                className="flex w-full items-center justify-center whitespace-nowrap px-4 text-xs text-white font-semi transition-opacity hover:opacity-70"
+                className="flex w-full items-center justify-center whitespace-nowrap px-4 text-xs text-kisetsu-dark dark:text-kisetsu-secondary font-semi transition-opacity hover:opacity-70"
                 href={tech.href}
                 rel="noopener noreferrer"
                 target="_blank"

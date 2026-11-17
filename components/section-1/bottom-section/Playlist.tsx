@@ -91,9 +91,9 @@ export default function NowListening() {
       {/* Header */}
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Disc3 className="" size={16} />
+          <Disc3 className="text-kisetsu-dark dark:text-kisetsu-secondary" size={16} />
 
-          <h3 className="text-xs font-bold uppercase tracking-wider text-kisetsu-secondary">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-kisetsu-dark dark:text-kisetsu-secondary">
             My Playlist
           </h3>
         </div>
@@ -115,19 +115,19 @@ export default function NowListening() {
               />
             </Tooltip.Trigger>
 
-            <Tooltip.Content className="max-w-64 rounded-xl p-3">
+            <Tooltip.Content className="max-w-64 rounded-xl p-3 ">
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-[#594936]">
+                <p className="text-xs font-semibold dark:text-kisetsu-secondary">
                   Copyright Notice
                 </p>
 
-                <p className="text-[11px] leading-relaxed text-[#594936]/75">
+                <p className="text-[11px] leading-relaxed dark:text-kisetsu-secondary">
                   Album artwork belongs to its respective artist and copyright
                   holders. Images are displayed for music identification and
                   informational purposes.
                 </p>
 
-                <p className="text-[11px] leading-relaxed text-[#594936]/75">
+                <p className="text-[11px] leading-relaxed dark:text-kisetsu-secondary">
                   Fair Use (Section 107, U.S. Copyright Act) may apply depending
                   on the circumstances. This notice does not itself establish
                   permission or fair use.
@@ -142,24 +142,24 @@ export default function NowListening() {
         </div>
 
         <div className="w-0 min-w-0 flex-1 overflow-hidden font-japan">
-          <p className="mb-1 text-[10px] font-medium uppercase tracking-widest text-kisetsu-secondary">
+          <p className="mb-1 text-[10px] font-medium uppercase tracking-widest text-kisetsu-dark dark:text-kisetsu-secondary">
             Now Listening
           </p>
 
-          <h3 className="truncate text-sm font-semibold text-kisetsu-secondary">
+          <h3 className="truncate text-sm font-semibold text-kisetsu-dark dark:text-kisetsu-secondary">
             {currentSong.song}
           </h3>
 
-          <p className="truncate text-xs font-bold text-kisetsu-secondary">
+          <p className="truncate text-xs font-bold text-kisetsu-dark dark:text-kisetsu-secondary">
             {currentSong.singer}
           </p>
         </div>
 
-        <div className="flex shrink-0 items-center gap-1 text-kisetsu-muted">
+        <div className="flex shrink-0 items-center gap-1 text-kisetsu-muted dark:text-kisetsu-secondary">
           <Button
             isIconOnly
             aria-label="Previous song"
-            className="text-kisetsu-muted"
+            className="text-kisetsu-muted dark:text-kisetsu-secondary"
             size="sm"
             variant="ghost"
             onPress={previousSong}
@@ -172,7 +172,7 @@ export default function NowListening() {
           <Button
             isIconOnly
             aria-label="Next song"
-            className="text-kisetsu-muted"
+            className="text-kisetsu-muted dark:text-kisetsu-secondary"
             size="sm"
             variant="ghost"
             onPress={nextSong}
@@ -185,7 +185,7 @@ export default function NowListening() {
       </div>
 
       {/* Static music-style progress slider */}
-      <div className="mt-3 flex w-full items-center gap-2 text-kisetsu-secondary">
+      <div className="mt-3 flex w-full items-center gap-2 text-kisetsu-dark dark:text-kisetsu-secondary">
         <span className="shrink-0 text-[9px] tabular-nums /55">00:52</span>
 
         <Slider
@@ -201,7 +201,7 @@ export default function NowListening() {
           </Slider.Track>
         </Slider>
 
-        <span className="shrink-0 text-[9px] tabular-nums text-kisetsu-secondary">
+        <span className="shrink-0 text-[9px] tabular-nums text-kisetsu-dark dark:text-kisetsu-secondary">
           03:45
         </span>
       </div>

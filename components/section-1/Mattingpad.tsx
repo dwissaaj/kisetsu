@@ -33,7 +33,7 @@ export default function MattingPad({
 
   return (
     <div
-      className={`pointer-events-none absolute -right-[12%] -top-[15%] z-10 w-[85%] max-w-6xl sm:-right-[10%] sm:-top-[20%] sm:w-[75%] ${className}`}
+      className={`pointer-events-none absolute -right-[12%] -top-[15%] -z-10 w-[85%] max-w-6xl sm:-right-[10%] sm:-top-[20%] sm:w-[75%] ${className}`}
       style={{
         transform: "rotate(45deg) scale(1.4)",
         transformOrigin: "center",

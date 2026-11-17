@@ -116,7 +116,7 @@ export default function BookDecoration() {
       </div>
 
       {/* FAN - RIGHT CENTER */}
-      <div className="hidden md:block pointer-events-none fixed right-[-12%] top-1/2 z-20 -translate-y-1/2">
+      <div className="hidden md:block pointer-events-none fixed right-[-12%] top-[35%] z-20 -translate-y-1/2">
         <div
           ref={fanHoverRef}
           className="pointer-events-auto cursor-pointer"

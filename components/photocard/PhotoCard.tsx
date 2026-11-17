@@ -23,7 +23,9 @@ export default function PhotoCard({
   const [liked, setLiked] = useState(false);
 
   return (
-    <Card className={`w-full max-w-xs gap-3 p-3 ${className ?? ""}`}>
+<Card
+  className={`w-full max-w-xs gap-3 border border-kisetsu-border bg-kisetsu-secondary p-3 text-kisetsu-dark dark:border-kisetsu-muted dark:bg-kisetsu-dark dark:text-kisetsu-secondary ${className ?? ""}`}
+>
       <div
         data-drag-handle
         className="relative aspect-square w-full cursor-grab overflow-hidden rounded-xl active:cursor-grabbing"

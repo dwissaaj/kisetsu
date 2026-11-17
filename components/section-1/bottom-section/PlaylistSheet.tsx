@@ -21,7 +21,7 @@ export default function PlaylistSheet({
         <Button
           isIconOnly
           aria-label="Open playlist"
-          className="shrink-0 text-[#594936] hover:text-[#FA699E]"
+          className="shrink-0 text-kisetsu-secondary dark:text-kisetsu-dark hover:text-[#FA699E]"
           size="sm"
           variant="ghost"
         >
@@ -29,9 +29,9 @@ export default function PlaylistSheet({
         </Button>
       </Sheet.Trigger>
 
-      <Sheet.Backdrop>
-        <Sheet.Content>
-          <Sheet.Dialog>
+      <Sheet.Backdrop >
+        <Sheet.Content >
+          <Sheet.Dialog className="bg-kisetsu-secondary dark:bg-kisetsu-muted">
             <Sheet.Handle />
             <Sheet.CloseTrigger />
 
@@ -41,8 +41,8 @@ export default function PlaylistSheet({
               </Sheet.Heading>
             </Sheet.Header>
 
-            <Sheet.Body>
-              <div className="flex flex-col gap-2">
+            <Sheet.Body >
+              <div className="flex flex-col gap-2 ">
                 {Songplaylist.map((song, index) => {
                   const isActive = currentIndex === index;
 
@@ -96,7 +96,7 @@ export default function PlaylistSheet({
                           </Tooltip.Content>
                         </Tooltip>
 
-                        <div className="min-w-0 flex-1 text-left font-japan">
+                        <div className="min-w-0 flex-1 text-left font-japan text-kisetsu-dark dark:text-kisetsu-secondary">
                           <p className="truncate text-sm font-semibold">
                             {song.song}
                           </p>

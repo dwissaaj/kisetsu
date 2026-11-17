@@ -98,7 +98,7 @@ export default function CameraGallery() {
           >
             <div data-draggable-card className="w-full">
               <PhotoCard
-                alt={`Wedding moment ${index + 1}`}
+                alt={`Cosplay moment ${index + 1}`}
                 description={descriptions[index]}
                 image={image}
                 initialLikes={128 + index * 12}
@@ -108,7 +108,7 @@ export default function CameraGallery() {
         );
       })}
 
-      <div className="pointer-events-none absolute bottom-2 right-2 z-50 rounded-full border border-default-200 bg-background/80 px-3 py-2 text-xs text-default-500 backdrop-blur">
+      <div className="pointer-events-none absolute bottom-2 right-2 z-50 rounded-full  bg-kisetsu-muted dark:bg-kisetsu-secondary px-3 py-2 text-xs text-kisetsu-secondary dark:text-kisetsu-muted backdrop-blur">
         ↔ Drag photos to explore
       </div>
     </div>
