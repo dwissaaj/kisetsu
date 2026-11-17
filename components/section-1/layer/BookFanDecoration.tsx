@@ -17,21 +17,21 @@ export default function BookDecoration() {
 
     if (!book || !fan) return;
 
-    // BOOK: TOP TO BOTTOM
+    // BOOK: TOP TO BOTTOM + FADE IN
     const bookAnimation = animate(book, {
       translateY: ["-120%", "0%"],
       opacity: [0, 1],
-      duration: 1800,
-      delay: 5000,
+      duration: 2500,
+      delay: 8000,
       ease: "out(3)",
     });
 
-    // FAN: RIGHT TO LEFT (HORIZONTAL)
+    // FAN: RIGHT TO LEFT + FADE IN
     const fanAnimation = animate(fan, {
       translateX: ["100%", "0%"],
       opacity: [0, 1],
-      duration: 1800,
-      delay: 5000,
+      duration: 2500,
+      delay: 8000,
       ease: "out(3)",
     });
 

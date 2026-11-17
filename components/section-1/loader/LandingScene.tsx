@@ -13,7 +13,7 @@ export default function LandingScene({
 }: LandingSceneProps) {
   return (
     <section
-      className={`relative isolate min-h-screen w-full overflow-hidden ${className}`}
+      className={`relative isolate h-dvh w-full overflow-hidden ${className}`}
     >
       {/* Wooden background */}
       <div
@@ -51,7 +51,7 @@ export default function LandingScene({
       />
 
       {/* Main content */}
-      <div className="relative z-20 min-h-screen w-full">{children}</div>
+      <div className="relative z-20 h-full w-full">{children}</div>
     </section>
   );
 }

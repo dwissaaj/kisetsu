@@ -15,8 +15,9 @@ export default function NameStack() {
   useEffect(() => {
     if (!nameRef.current || !videoRef.current || !devRef.current) return;
 
-    // DWIS AJI: unchanged
-    let nameAnimation: ReturnType<typeof animate> | undefined;
+    // DWIS AJI: fade in and slide up after the 8-second intro sequence
+    let nameOpacityAnimation: ReturnType<typeof animate> | undefined;
+    let nameMovementAnimation: ReturnType<typeof animate> | undefined;
     let nameDelayTimer: ReturnType<typeof setTimeout>;
 
     const nameSplit = splitText(nameRef.current, {
@@ -25,56 +26,82 @@ export default function NameStack() {
 
     nameSplit.addEffect(({ lines }) => {
       nameDelayTimer = setTimeout(() => {
-        nameAnimation = animate(lines, {
-          y: [{ to: ["100%", "0%"] }],
-          duration: 750,
+        nameOpacityAnimation = animate(nameRef.current!, {
+          opacity: [0, 1],
+          duration: 2000,
           ease: "out(3)",
           loop: false,
         });
-      }, 5000);
+
+        nameMovementAnimation = animate(lines, {
+          y: [{ to: ["100%", "0%"] }],
+          duration: 2000,
+          ease: "out(3)",
+          loop: false,
+        });
+      }, 8000);
     });
 
-    // VIDEO EDITOR: enter once after 6000ms, then stay visible
+    // VIDEO EDITOR: fade in and slide up
     const videoSplit = splitText(videoRef.current, {
       words: { wrap: "clip" },
     });
 
+    let videoOpacityAnimation: ReturnType<typeof animate> | undefined;
     let videoAnimation: ReturnType<typeof animate> | undefined;
 
     const videoDelayTimer = setTimeout(() => {
+      videoOpacityAnimation = animate(videoRef.current!, {
+        opacity: [0, 1],
+        duration: 1000,
+        ease: "out(3)",
+        loop: false,
+      });
+
       videoAnimation = animate(videoSplit.words, {
         y: [{ to: ["100%", "0%"] }],
-        duration: 750,
+        duration: 1000,
         ease: "out(3)",
         delay: stagger(100),
         loop: false,
       });
-    }, 6000);
+    }, 10000);
 
-    // SOFTWARE DEV: enter once after 6000ms, then stay visible
+    // SOFTWARE DEV: fade in and slide up
     const devSplit = splitText(devRef.current, {
       words: { wrap: "clip" },
     });
 
+    let devOpacityAnimation: ReturnType<typeof animate> | undefined;
     let devAnimation: ReturnType<typeof animate> | undefined;
 
     const devDelayTimer = setTimeout(() => {
+      devOpacityAnimation = animate(devRef.current!, {
+        opacity: [0, 1],
+        duration: 1000,
+        ease: "out(3)",
+        loop: false,
+      });
+
       devAnimation = animate(devSplit.words, {
         y: [{ to: ["100%", "0%"] }],
-        duration: 750,
+        duration: 1000,
         ease: "out(3)",
         delay: stagger(100),
         loop: false,
       });
-    }, 6000);
+    }, 10000);
 
     return () => {
       clearTimeout(nameDelayTimer);
       clearTimeout(videoDelayTimer);
       clearTimeout(devDelayTimer);
 
-      nameAnimation?.cancel();
+      nameOpacityAnimation?.cancel();
+      nameMovementAnimation?.cancel();
+      videoOpacityAnimation?.cancel();
       videoAnimation?.cancel();
+      devOpacityAnimation?.cancel();
       devAnimation?.cancel();
 
       nameSplit.revert();
@@ -87,21 +114,21 @@ export default function NameStack() {
     <div className="flex flex-col ">
       <h1
         ref={nameRef}
-        className="text-6xl font-extrabold leading-[0.95] tracking-[-0.06em] text-kisetsu-secondary md:text-7xl"
+        className="z-100 text-6xl font-extrabold leading-[0.95] tracking-[-0.06em] text-kisetsu-secondary opacity-0 md:text-7xl"
       >
         DWIS AJI
       </h1>
 
       <h2
         ref={videoRef}
-        className="text-3xl font-extrabold leading-[0.95] tracking-[-0.06em] text-kisetsu-secondary/50 md:text-4xl"
+        className="text-3xl font-extrabold leading-[0.95] tracking-[-0.06em] text-kisetsu-secondary/50 opacity-0 md:text-4xl"
       >
         VIDEO EDITOR
       </h2>
 
       <h2
         ref={devRef}
-        className="text-3xl font-extrabold leading-[0.95] tracking-[-0.06em] text-kisetsu-secondary/50 md:text-4xl"
+        className="text-3xl font-extrabold leading-[0.95] tracking-[-0.06em] text-kisetsu-secondary/50 opacity-0 md:text-4xl"
       >
         SOFTWARE DEV.
       </h2>

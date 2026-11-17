@@ -10,8 +10,8 @@ import PatternDecor from "@/components/section-1/layer/PatternDecor";
 
 export default function Home() {
   return (
-    <main className="h-screen w-full ">
-
+    <main className="h-screen w-full overflow-hidden">
+      <IntroSequence>
         <ScrollIndicator />
         <LandingScene>
           <MattingPad>
@@ -25,11 +25,10 @@ export default function Home() {
             />
           </MattingPad>
 
-
           <BookDecoration />
           <IntroSection />
         </LandingScene>
-
+      </IntroSequence>
     </main>
   );
 }

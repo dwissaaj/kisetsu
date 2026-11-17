@@ -30,7 +30,7 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
     const animation = animate(intro, {
       opacity: [1, 0],
       duration: 8000,
-      delay: 2100,
+      delay: 2000,
       ease: "inOut(3)",
       onComplete: () => {
         setShowLanding(true);
@@ -41,6 +41,7 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
       animation.revert();
     };
   }, []);
+
   useEffect(() => {
     const target = textRef.current;
 
@@ -79,7 +80,19 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
         >
           <FlowerBackground />
 
-          <div className="flex flex-col items-center gap-8">
+          {/* MP4 texture overlay */}
+          <video
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover opacity-20"
+            src="/background/bgsequence.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+          />
+
+          <div className="relative z-10 flex flex-col items-center gap-8">
             {/* Logo */}
             <div className="text-center">
               <p className="font-japan text-4xl tracking-[0.35em]">季節</p>

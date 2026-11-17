@@ -7,7 +7,7 @@ import NavStack from "./top-section/NavStack";
 
 export default function IntroSection() {
   return (
-    <section className="grid min-h-screen w-full grid-cols-1 grid-rows-[auto_auto_1fr_auto_auto] gap-y-6 px-[4%] py-10 md:grid-cols-2 md:grid-rows-[auto_1fr_auto] md:gap-x-4 md:gap-y-0">
+    <section className="box-border grid min-h-dvh w-full grid-cols-1 grid-rows-[auto_auto_1fr_auto_auto] gap-y-6 px-[4%] py-10 md:grid-cols-2 md:grid-rows-[auto_1fr_auto] md:gap-x-4 md:gap-y-0">
       <div className="row-start-1 min-w-0 justify-self-start md:col-start-1">
         <NameStack />
       </div>
