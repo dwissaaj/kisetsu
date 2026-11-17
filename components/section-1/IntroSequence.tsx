@@ -76,7 +76,7 @@ export default function IntroSequence({ children }: IntroSequenceProps) {
       {!showLanding && (
         <div
           ref={introRef}
-          className="gap-4 fixed inset-0 z-100 flex min-h-screen items-center justify-center bg-kisetsu text-[#4b493e]"
+          className="fixed inset-0 z-100 flex h-dvh w-full items-center justify-center gap-4 overflow-hidden bg-kisetsu text-[#4b493e]"
         >
           <FlowerBackground />
 
