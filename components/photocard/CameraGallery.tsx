@@ -122,7 +122,7 @@ export default function CameraGallery() {
       })}
 
       <div className="pointer-events-none absolute bottom-2 right-2 z-50 rounded-full bg-kisetsu-muted px-3 py-2 text-xs text-kisetsu-secondary backdrop-blur dark:bg-kisetsu-secondary dark:text-kisetsu-muted">
-        ↔ Drag photos to explore
+        ↔ Drag & Resize to explore
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
-
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 import Image from "next/image";
 import { Button, Card } from "@heroui/react";
 import { Heart } from "lucide-react";
@@ -25,18 +24,32 @@ export default function PhotoCard({
 }: PhotoCardProps) {
   const [liked, setLiked] = useState(false);
   const [expanded, setExpanded] = useState(false);
+
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const dragged = useRef(false);
 
-  const handlePointerDown = (event: React.PointerEvent<HTMLParagraphElement>) => {
+  const resizeStart = useRef<{
+    x: number;
+    width: number;
+    shell: HTMLElement;
+    maxWidth: number;
+  } | null>(null);
+
+  // Distinguish text clicks from drag gestures.
+  const handleTextPointerDown = (
+    event: PointerEvent<HTMLParagraphElement>,
+  ) => {
     pointerStart.current = {
       x: event.clientX,
       y: event.clientY,
     };
+
     dragged.current = false;
   };
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLParagraphElement>) => {
+  const handleTextPointerMove = (
+    event: PointerEvent<HTMLParagraphElement>,
+  ) => {
     if (!pointerStart.current) return;
 
     const distance = Math.hypot(
@@ -47,11 +60,11 @@ export default function PhotoCard({
     if (distance > 6) dragged.current = true;
   };
 
-  const handlePointerUp = () => {
+  const handleTextPointerUp = () => {
     pointerStart.current = null;
   };
 
-  const handleClick = () => {
+  const handleTextClick = () => {
     if (dragged.current) {
       dragged.current = false;
       return;
@@ -60,13 +73,66 @@ export default function PhotoCard({
     setExpanded((prev) => !prev);
   };
 
+  // Resize the outer draggable card shell.
+  const handleResizeStart = (event: PointerEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const shell = event.currentTarget.closest<HTMLElement>(
+      "[data-card-shell]",
+    );
+
+    const gallery = shell?.parentElement;
+
+    if (!shell || !gallery) return;
+
+    const galleryRect = gallery.getBoundingClientRect();
+    const shellRect = shell.getBoundingClientRect();
+
+    const offsetX = shellRect.left - galleryRect.left;
+
+    const maxWidth = Math.max(
+      140,
+      gallery.clientWidth - Math.max(0, offsetX) - 8,
+    );
+
+    resizeStart.current = {
+      x: event.clientX,
+      width: shell.offsetWidth,
+      shell,
+      maxWidth,
+    };
+
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handleResizeMove = (event: PointerEvent<HTMLDivElement>) => {
+    const start = resizeStart.current;
+
+    if (!start) return;
+
+    event.stopPropagation();
+
+    const nextWidth = Math.min(
+      start.maxWidth,
+      Math.max(140, start.width + event.clientX - start.x),
+    );
+
+    start.shell.style.width = `${nextWidth}px`;
+  };
+
+  const handleResizeEnd = (event: PointerEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    resizeStart.current = null;
+  };
+
   return (
     <Card
-      className={`relative w-full max-w-sm gap-3 border border-kisetsu-border bg-kisetsu-secondary p-3 text-kisetsu-dark transition duration-150 dark:border-kisetsu-muted dark:bg-kisetsu-dark dark:text-kisetsu-secondary ${
-        expanded ? "z-[100] scale-110" : "scale-100"
+      className={`relative w-full gap-1 border border-kisetsu-border bg-kisetsu-secondary p-2 text-kisetsu-dark transition duration-150 dark:border-kisetsu-muted dark:bg-kisetsu-dark dark:text-kisetsu-secondary ${
+        expanded ? "z-100 scale-110" : "scale-100"
       } ${className ?? ""}`}
     >
-      {/* IMAGE */}
+      {/* IMAGE / DRAG HANDLE */}
       <div
         data-drag-handle
         className="relative w-full cursor-grab overflow-hidden rounded-xl active:cursor-grabbing"
@@ -83,7 +149,7 @@ export default function PhotoCard({
       </div>
 
       {/* DESCRIPTION & LIKES */}
-      <Card.Content className="flex flex-row items-start justify-between gap-2 font-fredoka">
+      <Card.Content className="flex flex-col items-start justify-between gap-0.5 font-fredoka">
         <Button
           aria-label={liked ? "Unlike photo" : "Like photo"}
           className="shrink-0 px-2 font-bold hover:bg-accent"
@@ -99,24 +165,51 @@ export default function PhotoCard({
             }
             size={22}
           />
+
           <span className="text-kisetsu-dark dark:text-kisetsu-secondary">
             {initialLikes + (liked ? 1 : 0)}
           </span>
         </Button>
 
         <p
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-          onClick={handleClick}
-          className={`min-w-0 flex-1 cursor-pointer text-base font-medium leading-relaxed transition duration-150 ${
-            expanded ? "whitespace-normal break-words" : "truncate"
+          onPointerDown={handleTextPointerDown}
+          onPointerMove={handleTextPointerMove}
+          onPointerUp={handleTextPointerUp}
+          onPointerCancel={handleTextPointerUp}
+          onClick={handleTextClick}
+          className={`min-w-0 w-full cursor-pointer text-base font-medium leading-relaxed transition duration-150 ${
+            expanded
+              ? "whitespace-normal wrap-break-word"
+              : "truncate"
           }`}
         >
           {description}
         </p>
       </Card.Content>
+
+      {/* RESIZE HANDLE */}
+      <div
+        role="presentation"
+        onPointerDown={handleResizeStart}
+        onPointerMove={handleResizeMove}
+        onPointerUp={handleResizeEnd}
+        onPointerCancel={handleResizeEnd}
+        className="absolute bottom-1 right-1 z-20 flex h-6 w-6 cursor-se-resize touch-none items-center justify-center rounded-br-lg text-kisetsu-muted transition duration-150 hover:text-kisetsu-dark dark:hover:text-kisetsu-secondary"
+        style={{ touchAction: "none" }}
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        >
+          <path d="M13 5V13H5" />
+          <path d="M13 9L9 13" />
+        </svg>
+      </div>
     </Card>
   );
 }

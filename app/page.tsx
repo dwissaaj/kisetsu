@@ -9,7 +9,7 @@ import BookDecoration from "@/components/section-1/layer/BookFanDecoration";
 export default function Home() {
   return (
     <main className="h-dvh w-full overflow-hidden">
-      {/* <IntroSequence> */}
+      <IntroSequence>
         {/* <ScrollIndicator /> */}
         <LandingScene>
           <MattingPad>
@@ -26,7 +26,7 @@ export default function Home() {
           <BookDecoration />
           <IntroSection />
         </LandingScene>
-      {/* </IntroSequence> */}
+      </IntroSequence>
     </main>
   );
 }

@@ -185,3 +185,65 @@ export const SearchIcon = (props: IconSvgProps) => (
     />
   </svg>
 );
+export const ShrinkIcon = (props: IconSvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    {...props}
+  >
+    <path d="m15 15 6 6" />
+    <path d="m15 9 6-6" />
+    <path d="M21 16v5h-5" />
+    <path d="M21 8V3h-5" />
+    <path d="M3 16v5h5" />
+    <path d="m3 21 6-6" />
+    <path d="M3 8V3h5" />
+    <path d="M9 9 3 3" />
+  </svg>
+);
+
+export const ResizeIcon = (props: IconSvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    {...props}
+  >
+    <path d="M13 7v6H7" />
+    <path d="m4 4 9 9" />
+    <path d="M8.67 3H19a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V8.67" />
+  </svg>
+);
+
+export const GrabIcon = (props: IconSvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    {...props}
+  >
+    <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
+    <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
+    <path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" />
+    <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+  </svg>
+);
