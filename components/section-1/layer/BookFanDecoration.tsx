@@ -106,9 +106,9 @@ export default function BookDecoration() {
           >
             <Image
               fill
-              priority
               alt=""
-              className="object-contain"
+              sizes="(max-width: 768px) 0px, 50vw"
+              className="object-contain "
               src="/layer/book.png"
             />
           </div>
@@ -140,6 +140,7 @@ export default function BookDecoration() {
               <Image
                 fill
                 alt=""
+                sizes="(max-width: 768px) 0px, 50vw"
                 className="object-contain rotate-270"
                 src="/layer/fan.png"
               />

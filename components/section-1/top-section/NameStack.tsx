@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { animate, splitText, stagger } from "animejs";
 import { Button, Tooltip } from "@heroui/react";
-import React from "react";
 
 import { languages } from "@/config/lang";
 
@@ -13,7 +12,11 @@ export default function NameStack() {
   const devRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    if (!nameRef.current || !videoRef.current || !devRef.current) return;
+    const nameElement = nameRef.current;
+    const videoElement = videoRef.current;
+    const devElement = devRef.current;
+
+    if (!nameElement || !videoElement || !devElement) return;
 
     let nameOpacityAnimation: ReturnType<typeof animate> | undefined;
     let nameMovementAnimation: ReturnType<typeof animate> | undefined;
@@ -24,23 +27,23 @@ export default function NameStack() {
     let devOpacityAnimation: ReturnType<typeof animate> | undefined;
     let devAnimation: ReturnType<typeof animate> | undefined;
 
-    // Split DWIS AJI only once.
-    const nameSplit = splitText(nameRef.current, {
+    // DWIS AJI
+    const nameSplit = splitText(nameElement, {
       lines: { wrap: "clip" },
     });
 
-    // Capture the original lines. No addEffect or resize-triggered animation.
-    const nameLines = [...nameSplit.lines];
+    const nameTargets = nameSplit.lines.length
+      ? [...nameSplit.lines]
+      : [nameElement];
 
-    // DWIS AJI — animate only once after 8 seconds.
     const nameDelayTimer = setTimeout(() => {
-      nameOpacityAnimation = animate(nameRef.current!, {
+      nameOpacityAnimation = animate(nameElement, {
         opacity: [0, 1],
         duration: 2000,
         ease: "out(3)",
       });
 
-      nameMovementAnimation = animate(nameLines, {
+      nameMovementAnimation = animate(nameTargets, {
         y: [{ to: ["100%", "0%"] }],
         duration: 2000,
         ease: "out(3)",
@@ -48,18 +51,22 @@ export default function NameStack() {
     }, 8000);
 
     // VIDEO EDITOR
-    const videoSplit = splitText(videoRef.current, {
+    const videoSplit = splitText(videoElement, {
       words: { wrap: "clip" },
     });
 
+    const videoTargets = videoSplit.words.length
+      ? [...videoSplit.words]
+      : [videoElement];
+
     const videoDelayTimer = setTimeout(() => {
-      videoOpacityAnimation = animate(videoRef.current!, {
+      videoOpacityAnimation = animate(videoElement, {
         opacity: [0, 1],
         duration: 1000,
         ease: "out(3)",
       });
 
-      videoAnimation = animate(videoSplit.words, {
+      videoAnimation = animate(videoTargets, {
         y: [{ to: ["100%", "0%"] }],
         duration: 1000,
         ease: "out(3)",
@@ -68,18 +75,22 @@ export default function NameStack() {
     }, 10000);
 
     // SOFTWARE DEV
-    const devSplit = splitText(devRef.current, {
+    const devSplit = splitText(devElement, {
       words: { wrap: "clip" },
     });
 
+    const devTargets = devSplit.words.length
+      ? [...devSplit.words]
+      : [devElement];
+
     const devDelayTimer = setTimeout(() => {
-      devOpacityAnimation = animate(devRef.current!, {
+      devOpacityAnimation = animate(devElement, {
         opacity: [0, 1],
         duration: 1000,
         ease: "out(3)",
       });
 
-      devAnimation = animate(devSplit.words, {
+      devAnimation = animate(devTargets, {
         y: [{ to: ["100%", "0%"] }],
         duration: 1000,
         ease: "out(3)",
@@ -108,29 +119,29 @@ export default function NameStack() {
   }, []);
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <h1
         ref={nameRef}
-        className="text-kisetsu-dark dark:text-kisetsu-secondary z-100 text-6xl font-extrabold leading-[0.95] tracking-[-0.06em]  opacity-0 md:text-7xl"
+        className="text-kisetsu-dark dark:text-kisetsu-secondary z-100 text-6xl font-extrabold leading-[0.95] tracking-[-0.06em] opacity-0 md:text-7xl"
       >
         DWIS AJI
       </h1>
 
       <h2
         ref={videoRef}
-        className="text-kisetsu-dark dark:text-kisetsu-secondary text-3xl font-extrabold leading-[0.95] tracking-[-0.06em]  opacity-0 md:text-4xl"
+        className="text-kisetsu-dark dark:text-kisetsu-secondary text-3xl font-extrabold leading-[0.95] tracking-[-0.06em] opacity-0 md:text-4xl"
       >
         VIDEO EDITOR
       </h2>
 
       <h2
         ref={devRef}
-        className="text-kisetsu-dark dark:text-kisetsu-secondary  text-3xl font-extrabold leading-[0.95] tracking-[-0.06em]  opacity-0 md:text-4xl"
+        className="text-kisetsu-dark dark:text-kisetsu-secondary text-3xl font-extrabold leading-[0.95] tracking-[-0.06em] opacity-0 md:text-4xl"
       >
         SOFTWARE DEV.
       </h2>
 
-      <div className="text-kisetsu-dark dark:text-kisetsu-secondary mt-3 flex flex-wrap items-center gap-x-1.5 text-xs font-medium tracking-wide  md:text-sm">
+      <div className="text-kisetsu-dark dark:text-kisetsu-secondary mt-3 flex flex-wrap items-center gap-x-1.5 text-xs font-medium tracking-wide md:text-sm">
         <span>Remote Worker</span>
         <span>·</span>
         <span>Indonesia</span>
@@ -147,7 +158,7 @@ export default function NameStack() {
                 {language.code}
               </Button>
 
-              <Tooltip.Content className={"bg-accent"}>
+              <Tooltip.Content className="bg-accent">
                 <p>{language.description}</p>
               </Tooltip.Content>
             </Tooltip>
