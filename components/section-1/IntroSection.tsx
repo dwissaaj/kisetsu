@@ -6,6 +6,7 @@ import NameStack from "./top-section/NameStack";
 import NavStack from "./top-section/NavStack";
 import ParallaxGallery from "../photocard/ParalaxWrapper";
 import CameraGallery from "../photocard/CameraGallery";
+import DragWrapper from "../photocard/DragWrapper";
 
 export default function IntroSection() {
   return (
@@ -22,9 +23,12 @@ export default function IntroSection() {
         <NowListening />
       </div>
 
-      <div className="row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-full md:justify-self-end">
-        <ParallaxGallery />
-      </div>
+<div className="relative z-50 row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-full md:justify-self-end">
+
+      <DragWrapper className="z-30">
+        <CameraGallery />
+      </DragWrapper>
+</div>
     </section>
   );
 }

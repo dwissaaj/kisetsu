@@ -1,36 +1,18 @@
+
 "use client";
 
 import { useEffect, useRef } from "react";
 import { animate, createDraggable } from "animejs";
 
 import PhotoCard from "./PhotoCard";
+import { postGallery } from "@/config/post";
 
-export const GalleryUrl = [
-  "/cosplay/4.png",
-  "/cosplay/6.png",
-  "/cosplay/5.png",
-  "/cosplay/7.png",
-  "/cosplay/8.png",
-  "/cosplay/9.png",
-];
 
-const positions = [
-  { left: "2%", top: "65px", rotate: -13 },
-  { left: "18%", top: "20px", rotate: -9 },
-  { left: "35%", top: "75px", rotate: -4 },
-  { left: "52%", top: "30px", rotate: 2 },
-  { left: "69%", top: "80px", rotate: 8 },
-  { left: "85%", top: "35px", rotate: 12 },
-];
-
-const descriptions = [
-  "A moment worth remembering.",
-  "Captured in the right light.",
-  "Little details, lasting memories.",
-  "A story in every frame.",
-  "Beautifully imperfect moments.",
-  "Memories that stay forever.",
-];
+const positions = postGallery.map((_, index) => ({
+  left: `${(index / (postGallery.length - 1)) * 83}%`,
+  top: `${[65, 20, 75, 30, 80, 35, 65, 20, 75, 30, 80][index]}px`,
+  rotate: -13 + (index / (postGallery.length - 1)) * 25,
+}));
 
 export default function CameraGallery() {
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -44,21 +26,13 @@ export default function CameraGallery() {
       gallery.querySelectorAll<HTMLElement>("[data-card-shell]"),
     );
 
-    const cards = gallery.querySelectorAll<HTMLElement>(
-      "[data-draggable-card]",
-    );
-
-    const handles = gallery.querySelectorAll<HTMLElement>("[data-drag-handle]");
-
     const firstCard = shells[0];
 
     if (!firstCard) return;
 
-    // Common starting position: bottom-right.
     const stackX = gallery.clientWidth - firstCard.offsetWidth - 8;
-const stackY = gallery.clientHeight - firstCard.offsetHeight - 55;
+    const stackY = gallery.clientHeight - firstCard.offsetHeight - 55;
 
-    // Stack every card behind the first card.
     shells.forEach((shell, index) => {
       shell.style.left = `${stackX}px`;
       shell.style.top = `${stackY}px`;
@@ -67,17 +41,14 @@ const stackY = gallery.clientHeight - firstCard.offsetHeight - 55;
       shell.style.zIndex = `${shells.length - index}`;
     });
 
-    // Wait for the rest of the landing sequence.
-    // Then spread all cards simultaneously.
-    // Stage 1: Keep the deck hidden initially.
     const animations = shells.map((shell, index) => {
       const position = positions[index];
 
-      const finalX = (parseFloat(position.left) / 100) * gallery.clientWidth;
+      const finalX =
+        (parseFloat(position.left) / 100) * gallery.clientWidth;
 
       const finalY = parseFloat(position.top);
 
-      // Stage 2: Reveal only the top card.
       if (index === 0) {
         return animate(shell, {
           opacity: [0, 1],
@@ -87,7 +58,6 @@ const stackY = gallery.clientHeight - firstCard.offsetHeight - 55;
         });
       }
 
-      // Stage 3: Fan out all remaining cards together.
       return animate(shell, {
         left: [`${stackX}px`, `${finalX}px`],
         top: [`${stackY}px`, `${finalY}px`],
@@ -98,15 +68,19 @@ const stackY = gallery.clientHeight - firstCard.offsetHeight - 55;
         ease: "out(4)",
       });
     });
-    const draggables = Array.from(cards).map((card, index) =>
-      createDraggable(card, {
-        container: gallery,
-        trigger: handles[index],
+
+    // Each card shell is draggable independently.
+    const draggables = shells.map((shell) => {
+      const handle =
+        shell.querySelector<HTMLElement>("[data-drag-handle]");
+
+      return createDraggable(shell, {
+        trigger: handle ?? shell,
         releaseStiffness: 180,
         releaseDamping: 24,
         cursor: true,
-      }),
-    );
+      });
+    });
 
     return () => {
       animations.forEach((animation) => animation.revert());
@@ -117,34 +91,32 @@ const stackY = gallery.clientHeight - firstCard.offsetHeight - 55;
   return (
     <div
       ref={galleryRef}
-      className="relative h-[380px] w-full overflow-hidden"
-      style={{
-        touchAction: "pan-y",
-      }}
+      className="relative min-h-[500px] w-full overflow-visible"
+      style={{ touchAction: "pan-y" }}
     >
-      {GalleryUrl.map((image, index) => {
+      {postGallery.map((post, index) => {
         const position = positions[index];
 
         return (
           <div
-            key={image}
+            key={post.id}
             data-card-shell
             className="absolute w-[22%] min-w-40 max-w-64"
             style={{
               left: position.left,
               top: position.top,
-              zIndex: GalleryUrl.length - index,
+              zIndex: postGallery.length - index,
               rotate: "0deg",
+              opacity: 0,
             }}
           >
-            <div data-draggable-card className="w-full">
-              <PhotoCard
-                alt={`Cosplay moment ${index + 1}`}
-                description={descriptions[index]}
-                image={image}
-                initialLikes={128 + index * 12}
-              />
-            </div>
+            <PhotoCard
+              alt={`Cosplay moment ${post.id}`}
+              description={post.description}
+              image={post.url}
+              initialLikes={post.likes}
+              aspectRatio={post.aspectRatio}
+            />
           </div>
         );
       })}

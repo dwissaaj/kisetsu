@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -26,9 +27,9 @@ export default function BookDecoration() {
       ease: "out(3)",
     });
 
-    // FAN: RIGHT TO LEFT + FADE IN
+    // FAN: LEFT TO RIGHT + FADE IN
     const fanAnimation = animate(fan, {
-      translateX: ["100%", "0%"],
+      translateX: ["-100%", "0%"],
       opacity: [0, 1],
       duration: 2500,
       delay: 8000,
@@ -86,7 +87,7 @@ export default function BookDecoration() {
   return (
     <>
       {/* BOOK - TOP CENTER */}
-      <div className="hidden md:block pointer-events-none fixed left-1/2 top-0 z-20 -translate-x-1/2 -translate-y-1/2">
+      <div className="pointer-events-none fixed left-1/2 top-0 z-20 hidden -translate-x-1/2 -translate-y-1/2 md:block">
         <div
           ref={bookHoverRef}
           className="pointer-events-auto cursor-pointer"
@@ -115,8 +116,8 @@ export default function BookDecoration() {
         </div>
       </div>
 
-      {/* FAN - RIGHT CENTER */}
-      <div className="hidden md:block pointer-events-none fixed right-[-12%] top-[35%] z-20 -translate-y-1/2">
+      {/* FAN - LEFT CENTER */}
+      <div className="pointer-events-none fixed left-[-12%] top-[45%] z-20 hidden -translate-y-1/2 md:block">
         <div
           ref={fanHoverRef}
           className="pointer-events-auto cursor-pointer"
@@ -130,7 +131,7 @@ export default function BookDecoration() {
           onMouseEnter={handleFanEnter}
           onMouseLeave={handleFanLeave}
         >
-          {/* FAN ENTRANCE - RIGHT TO LEFT */}
+          {/* FAN ENTRANCE - LEFT TO RIGHT */}
           <div
             ref={fanEntranceRef}
             className="relative h-[280px] w-[280px] opacity-0 sm:h-[380px] sm:w-[380px] lg:h-[480px] lg:w-[480px]"
@@ -140,7 +141,7 @@ export default function BookDecoration() {
               <Image
                 fill
                 alt=""
-                className="object-contain rotate-90"
+                className="object-contain rotate-270"
                 src="/layer/fan.png"
               />
             </div>

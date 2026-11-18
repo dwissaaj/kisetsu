@@ -1,0 +1,66 @@
+
+export const postGallery = [
+  {
+    id: 1,
+    description: "Cute Cosplayers Say Hi!",
+    url: "/cosplay/1.png",
+    likes: 128,
+    aspectRatio: "3 / 4",
+  },
+  {
+    id: 2,
+    description: "Gathering 2026",
+    url: "/cosplay/3.png",
+    likes: 245,
+    aspectRatio: "3 / 4",
+  },
+  {
+    id: 3,
+    description: "Lost in the colors of spring.",
+    url: "/cosplay/4.png",
+    likes: 186,
+    aspectRatio: "3 / 4",
+  },
+  {
+    id: 4,
+    description: "A smile worth remembering.",
+    url: "/cosplay/6.png",
+    likes: 312,
+    aspectRatio: "1 / 1",
+  },
+  {
+    id: 5,
+    description: "Dreaming somewhere between fantasy and reality.",
+    url: "/cosplay/7.png",
+    likes: 156,
+    aspectRatio: "1 / 1",
+  },
+  {
+    id: 6,
+    description: "Need design something?",
+    url: "/cosplay/12.jpg",
+    likes: 278,
+    aspectRatio: "16 / 9",
+  },
+  {
+    id: 7,
+    description: "Edit something?",
+    url: "/cosplay/13.jpg",
+    likes: 194,
+    aspectRatio: "16 / 9",
+  },
+  {
+    id: 10,
+    description: "Just a fake design",
+    url: "/cosplay/10.jpg",
+    likes: 89,
+    aspectRatio: "3 / 4",
+  },
+  {
+    id: 11,
+    description: "Fake UI/UX Design",
+    url: "/cosplay/11.jpg",
+    likes: 102,
+    aspectRatio: "3 / 4",
+  },
+];
