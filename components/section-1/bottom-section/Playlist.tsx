@@ -6,6 +6,7 @@ import { Button, Slider, Tooltip } from "@heroui/react";
 import { Disc3, Heart, PauseIcon, SkipBack, SkipForward } from "lucide-react";
 import { animate } from "animejs";
 import { useTheme } from "next-themes";
+
 import PlaylistSheet from "./PlaylistSheet";
 
 import { Songplaylist } from "@/config/playlist";

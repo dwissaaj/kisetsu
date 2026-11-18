@@ -33,11 +33,11 @@ export const NavStackSite = [
     label: "WhatsApp",
     href: "https://wa.me/6285251743273?text=%E2%80%8E%20Hi%20Nice%20To%20Meet%20You%0AI%20am",
   },
-    {
+  {
     label: "Github",
     href: "https://github.com/dwissaaj",
   },
-      {
+  {
     label: "Fastwork",
     href: "https://fastwork.id/user/dwisaji",
   },

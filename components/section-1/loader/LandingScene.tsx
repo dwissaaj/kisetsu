@@ -18,13 +18,13 @@ export default function LandingScene({
     >
       {/* Wooden background */}
       <Image
-        src="/background/6.png"
-        alt=""
         fill
         priority
-        sizes="100vw"
-        quality={75}
+        alt=""
         className="pointer-events-none z-0 object-cover object-center"
+        quality={75}
+        sizes="100vw"
+        src="/background/6.png"
       />
 
       {/* Moving shadow video */}

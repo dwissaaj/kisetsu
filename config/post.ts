@@ -1,4 +1,3 @@
-
 export const postGallery = [
   {
     id: 1,
@@ -9,14 +8,14 @@ export const postGallery = [
   },
   {
     id: 2,
-    description: "Gathering 2026",
+    description: "皆さん楽しかった",
     url: "/cosplay/3.png",
     likes: 245,
     aspectRatio: "3 / 4",
   },
   {
     id: 3,
-    description: "Lost in the colors of spring.",
+    description: "お可愛い子",
     url: "/cosplay/4.png",
     likes: 186,
     aspectRatio: "3 / 4",

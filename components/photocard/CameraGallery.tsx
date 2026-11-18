@@ -1,12 +1,11 @@
-
 "use client";
 
 import { useEffect, useRef } from "react";
 import { animate, createDraggable } from "animejs";
 
 import PhotoCard from "./PhotoCard";
-import { postGallery } from "@/config/post";
 
+import { postGallery } from "@/config/post";
 
 const positions = postGallery.map((_, index) => ({
   left: `${(index / (postGallery.length - 1)) * 83}%`,
@@ -44,8 +43,7 @@ export default function CameraGallery() {
     const animations = shells.map((shell, index) => {
       const position = positions[index];
 
-      const finalX =
-        (parseFloat(position.left) / 100) * gallery.clientWidth;
+      const finalX = (parseFloat(position.left) / 100) * gallery.clientWidth;
 
       const finalY = parseFloat(position.top);
 
@@ -71,8 +69,7 @@ export default function CameraGallery() {
 
     // Each card shell is draggable independently.
     const draggables = shells.map((shell) => {
-      const handle =
-        shell.querySelector<HTMLElement>("[data-drag-handle]");
+      const handle = shell.querySelector<HTMLElement>("[data-drag-handle]");
 
       return createDraggable(shell, {
         trigger: handle ?? shell,
@@ -112,10 +109,10 @@ export default function CameraGallery() {
           >
             <PhotoCard
               alt={`Cosplay moment ${post.id}`}
+              aspectRatio={post.aspectRatio}
               description={post.description}
               image={post.url}
               initialLikes={post.likes}
-              aspectRatio={post.aspectRatio}
             />
           </div>
         );

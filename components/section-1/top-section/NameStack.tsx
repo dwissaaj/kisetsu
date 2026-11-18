@@ -138,7 +138,7 @@ export default function NameStack() {
 
         {languages.map((language, index) => (
           <React.Fragment key={language.code}>
-            <Tooltip  delay={0}>
+            <Tooltip delay={0}>
               <Button
                 className="text-kisetsu-dark dark:text-kisetsu-secondary h-auto min-w-0 rounded-sm px-1 py-0 text-xs font-bold hover:text-[#FA699E] dark:hover:text-[#FA699E] md:text-sm"
                 size="sm"

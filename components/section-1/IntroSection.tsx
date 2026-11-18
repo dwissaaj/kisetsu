@@ -1,12 +1,11 @@
 "use client";
 
-import TechStatus from "./bottom-section/TechStack";
+import CameraGallery from "../photocard/CameraGallery";
+import DragWrapper from "../photocard/DragWrapper";
+
 import NowListening from "./bottom-section/Playlist";
 import NameStack from "./top-section/NameStack";
 import NavStack from "./top-section/NavStack";
-import ParallaxGallery from "../photocard/ParalaxWrapper";
-import CameraGallery from "../photocard/CameraGallery";
-import DragWrapper from "../photocard/DragWrapper";
 
 export default function IntroSection() {
   return (
@@ -15,20 +14,19 @@ export default function IntroSection() {
         <NameStack />
       </div>
 
-<div className="row-start-2 min-w-0 justify-self-start md:col-start-2 md:row-start-1 md:justify-self-end">
-  <NavStack />
-</div>
+      <div className="row-start-2 min-w-0 justify-self-start md:col-start-2 md:row-start-1 md:justify-self-end">
+        <NavStack />
+      </div>
 
       <div className="row-start-4 min-w-0 w-full self-end justify-self-start md:col-start-1 md:row-start-3 md:w-3/4">
         <NowListening />
       </div>
 
-<div className="relative z-50 row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-full md:justify-self-end">
-
-      <DragWrapper className="z-30">
-        <CameraGallery />
-      </DragWrapper>
-</div>
+      <div className="relative z-50 row-start-5 min-w-0 w-full self-end justify-self-start md:col-start-2 md:row-start-3 md:w-full md:justify-self-end">
+        <DragWrapper className="z-30">
+          <CameraGallery />
+        </DragWrapper>
+      </div>
     </section>
   );
 }

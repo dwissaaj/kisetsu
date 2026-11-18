@@ -25,8 +25,7 @@ export default function DragWrapper({
 
     const draggables = items.map((item) =>
       createDraggable(item, {
-        trigger:
-          item.querySelector<HTMLElement>("[data-drag-handle]") ?? item,
+        trigger: item.querySelector<HTMLElement>("[data-drag-handle]") ?? item,
         releaseStiffness: 180,
         releaseDamping: 24,
         cursor: true,

@@ -36,9 +36,7 @@ export default function PhotoCard({
   } | null>(null);
 
   // Distinguish text clicks from drag gestures.
-  const handleTextPointerDown = (
-    event: PointerEvent<HTMLParagraphElement>,
-  ) => {
+  const handleTextPointerDown = (event: PointerEvent<HTMLButtonElement>) => {
     pointerStart.current = {
       x: event.clientX,
       y: event.clientY,
@@ -47,9 +45,7 @@ export default function PhotoCard({
     dragged.current = false;
   };
 
-  const handleTextPointerMove = (
-    event: PointerEvent<HTMLParagraphElement>,
-  ) => {
+  const handleTextPointerMove = (event: PointerEvent<HTMLButtonElement>) => {
     if (!pointerStart.current) return;
 
     const distance = Math.hypot(
@@ -67,6 +63,7 @@ export default function PhotoCard({
   const handleTextClick = () => {
     if (dragged.current) {
       dragged.current = false;
+
       return;
     }
 
@@ -78,9 +75,7 @@ export default function PhotoCard({
     event.preventDefault();
     event.stopPropagation();
 
-    const shell = event.currentTarget.closest<HTMLElement>(
-      "[data-card-shell]",
-    );
+    const shell = event.currentTarget.closest<HTMLElement>("[data-card-shell]");
 
     const gallery = shell?.parentElement;
 
@@ -128,8 +123,8 @@ export default function PhotoCard({
 
   return (
     <Card
-      className={`relative w-full gap-1 border border-kisetsu-border bg-kisetsu-secondary p-2 text-kisetsu-dark transition duration-150 dark:border-kisetsu-muted dark:bg-kisetsu-dark dark:text-kisetsu-secondary ${
-        expanded ? "z-100 scale-110" : "scale-100"
+      className={`relative w-full gap-3 border border-kisetsu-border bg-kisetsu-secondary p-3 text-kisetsu-dark transition duration-150 dark:border-kisetsu-muted dark:bg-kisetsu-dark dark:text-kisetsu-secondary ${
+        expanded ? "z-[100] scale-110" : "scale-100"
       } ${className ?? ""}`}
     >
       {/* IMAGE / DRAG HANDLE */}
@@ -149,7 +144,7 @@ export default function PhotoCard({
       </div>
 
       {/* DESCRIPTION & LIKES */}
-      <Card.Content className="flex flex-col items-start justify-between gap-0.5 font-fredoka">
+      <Card.Content className="flex flex-col items-start justify-between gap-2 font-fredoka">
         <Button
           aria-label={liked ? "Unlike photo" : "Like photo"}
           className="shrink-0 px-2 font-bold hover:bg-accent"
@@ -171,40 +166,42 @@ export default function PhotoCard({
           </span>
         </Button>
 
-        <p
+        {/* DESCRIPTION */}
+        <Button
+          aria-expanded={expanded}
+          className={`hover:bg-accent h-auto min-w-0 w-full justify-start px-2 text-left text-sm font-normal leading-relaxed ${
+            expanded ? "whitespace-normal break-words" : "truncate"
+          }`}
+          type="button"
+          variant="ghost"
+          onPointerCancel={handleTextPointerUp}
           onPointerDown={handleTextPointerDown}
           onPointerMove={handleTextPointerMove}
           onPointerUp={handleTextPointerUp}
-          onPointerCancel={handleTextPointerUp}
-          onClick={handleTextClick}
-          className={`min-w-0 w-full cursor-pointer text-base font-medium leading-relaxed transition duration-150 ${
-            expanded
-              ? "whitespace-normal wrap-break-word"
-              : "truncate"
-          }`}
+          onPress={handleTextClick}
         >
           {description}
-        </p>
+        </Button>
       </Card.Content>
 
       {/* RESIZE HANDLE */}
       <div
+        className="absolute bottom-1 right-1 z-20 flex h-6 w-6 cursor-se-resize touch-none items-center justify-center rounded-br-lg text-kisetsu-muted transition duration-150 hover:text-kisetsu-dark dark:hover:text-kisetsu-secondary"
         role="presentation"
+        style={{ touchAction: "none" }}
+        onPointerCancel={handleResizeEnd}
         onPointerDown={handleResizeStart}
         onPointerMove={handleResizeMove}
         onPointerUp={handleResizeEnd}
-        onPointerCancel={handleResizeEnd}
-        className="absolute bottom-1 right-1 z-20 flex h-6 w-6 cursor-se-resize touch-none items-center justify-center rounded-br-lg text-kisetsu-muted transition duration-150 hover:text-kisetsu-dark dark:hover:text-kisetsu-secondary"
-        style={{ touchAction: "none" }}
       >
         <svg
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
           fill="none"
+          height="14"
           stroke="currentColor"
-          strokeWidth="1.5"
           strokeLinecap="round"
+          strokeWidth="1.5"
+          viewBox="0 0 14 14"
+          width="14"
         >
           <path d="M13 5V13H5" />
           <path d="M13 9L9 13" />

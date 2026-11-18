@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRef, useState, useEffect } from "react";
@@ -6,9 +5,10 @@ import Link from "next/link";
 import { animate, splitText, stagger } from "animejs";
 import { useTheme } from "next-themes";
 
+import TechStatus from "../bottom-section/TechStack";
+
 import { ThemeSwitch } from "@/components/theme-switch";
 import { NavStackSite } from "@/config/site";
-import TechStatus from "../bottom-section/TechStack";
 
 export default function NavStack() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,9 +16,7 @@ export default function NavStack() {
 
   const { resolvedTheme } = useTheme();
 
-  const animations = useRef<Map<string, { cancel: () => unknown }>>(
-    new Map(),
-  );
+  const animations = useRef<Map<string, { cancel: () => unknown }>>(new Map());
 
   useEffect(() => {
     setMounted(true);
@@ -78,8 +76,8 @@ export default function NavStack() {
             muted
             playsInline
             aria-hidden="true"
-            preload="metadata"
             className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+            preload="metadata"
           >
             <source src={backgroundVideo} type="video/mp4" />
           </video>
@@ -128,8 +126,8 @@ export default function NavStack() {
               muted
               playsInline
               aria-hidden="true"
-              preload="metadata"
               className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+              preload="metadata"
             >
               <source src={backgroundVideo} type="video/mp4" />
             </video>
@@ -170,8 +168,8 @@ export default function NavStack() {
               muted
               playsInline
               aria-hidden="true"
-              preload="metadata"
               className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+              preload="metadata"
             >
               <source src={backgroundVideo} type="video/mp4" />
             </video>

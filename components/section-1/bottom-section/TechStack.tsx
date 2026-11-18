@@ -112,7 +112,6 @@ export default function TechStatus() {
 
   return (
     <div className="relative isolate flex items-center gap-2 overflow-hidden rounded-full border border-white/30 px-3 py-1.5">
-
       {/* Theme-dependent video background */}
       {mounted && (
         <video
@@ -122,8 +121,8 @@ export default function TechStatus() {
           muted
           playsInline
           aria-hidden="true"
-          preload="metadata"
           className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+          preload="metadata"
         >
           <source
             src={

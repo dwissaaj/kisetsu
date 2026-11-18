@@ -29,8 +29,8 @@ export default function PlaylistSheet({
         </Button>
       </Sheet.Trigger>
 
-      <Sheet.Backdrop >
-        <Sheet.Content >
+      <Sheet.Backdrop>
+        <Sheet.Content>
           <Sheet.Dialog className="bg-kisetsu-secondary dark:bg-kisetsu-muted">
             <Sheet.Handle />
             <Sheet.CloseTrigger />
@@ -41,7 +41,7 @@ export default function PlaylistSheet({
               </Sheet.Heading>
             </Sheet.Header>
 
-            <Sheet.Body >
+            <Sheet.Body>
               <div className="flex flex-col gap-2 ">
                 {Songplaylist.map((song, index) => {
                   const isActive = currentIndex === index;
