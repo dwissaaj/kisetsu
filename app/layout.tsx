@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
-
+import Script from "next/script";
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
@@ -94,6 +94,12 @@ export default function RootLayout({
           fontFredoka.variable,
         )}
       >
+        <Script
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "02d0ba710a5649ba8d1f4f67a6ec8b4a"}'
+          type="module"
+          strategy="afterInteractive"
+        />
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex min-h-screen flex-col">
             <LenisSmoothScroll>
